@@ -1,1 +1,1 @@
-console.log("AQR Services website is running!");
+console.log("AQR Services website loaded.");
