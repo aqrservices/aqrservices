@@ -267,3 +267,72 @@ footer {
     padding: 4rem 6%;
   }
 }
+/* ====== Mobile Navigation (Fancy Animated) ====== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  width: 26px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Initial hidden state for nav-links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  transition: all 0.4s ease-in-out;
+}
+
+/* ====== Mobile view ====== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+    gap: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+  }
+
+  .nav-links a {
+    color: white;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+  }
+
+  /* Visible state when active */
+  .nav-links.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* Animate the hamburger to an X */
+  .menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  .menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
