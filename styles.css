@@ -12,27 +12,35 @@ body {
 #navbar {
   position: fixed;
   top: 0;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 3rem;
+  padding: 1rem 6%;
   background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   z-index: 1000;
-  transition: top 0.4s;
+  transition: top 0.4s ease, background 0.3s ease;
 }
 
 .logo {
   font-weight: 600;
   color: #a020f0;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 nav a {
   color: #c0c0c0;
-  margin: 0 1rem;
   text-decoration: none;
+  font-size: 1rem;
   transition: color 0.3s, text-shadow 0.3s;
 }
 
@@ -67,7 +75,7 @@ nav a:hover {
 }
 
 .hero h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   color: #fff;
   text-shadow: 0 0 20px #a020f0;
 }
@@ -80,7 +88,7 @@ nav a:hover {
 .btn {
   background-color: #a020f0;
   color: #fff;
-  padding: 0.8rem 1.5rem;
+  padding: 0.8rem 1.8rem;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -89,7 +97,7 @@ nav a:hover {
 }
 
 .btn:hover {
-  box-shadow: 0 0 20px #a020f0;
+  box-shadow: 0 0 25px #a020f0;
 }
 
 /* Sections */
@@ -114,7 +122,7 @@ section {
 
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 15px #a020f0;
+  box-shadow: 0 0 20px #a020f0;
 }
 
 ul {
