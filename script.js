@@ -1,100 +1,107 @@
 // ============================
-// NAVBAR: Hide on scroll down, show on scroll up
-// ============================
-let prevScrollPos = window.pageYOffset;
+// ===== NAVBAR SCROLL HIDE/SHOW =====
+let lastScrollTop = 0;
 const navbar = document.getElementById("navbar");
 
 window.addEventListener("scroll", () => {
-  const currentScrollPos = window.pageYOffset;
-
-  // Add subtle fade on scroll
-  if (prevScrollPos > currentScrollPos) {
-    navbar.style.top = "0";
-    navbar.style.opacity = "1";
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  if (scrollTop > lastScrollTop) {
+    // Scrolling down
+    navbar.style.transform = "translateY(-100%)";
   } else {
-    navbar.style.top = "-90px";
-    navbar.style.opacity = "0.85";
+    // Scrolling up
+    navbar.style.transform = "translateY(0)";
   }
-
-  prevScrollPos = currentScrollPos;
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Prevent negative scroll
 });
 
-// ============================
-// FADE-IN EFFECT ON SCROLL
-// ============================
-const faders = document.querySelectorAll(".fade-in");
-const appearOptions = { threshold: 0.15 };
+// ===== FADE-IN ON SCROLL =====
+const fadeEls = document.querySelectorAll(".fade-in");
+
+const appearOptions = {
+  threshold: 0.2,
+  rootMargin: "0px 0px -50px 0px",
+};
 
 const appearOnScroll = new IntersectionObserver((entries, observer) => {
-  entries.forEach((entry) => {
+  entries.forEach(entry => {
     if (!entry.isIntersecting) return;
     entry.target.classList.add("visible");
     observer.unobserve(entry.target);
   });
 }, appearOptions);
 
-faders.forEach((fader) => appearOnScroll.observe(fader));
+fadeEls.forEach(el => appearOnScroll.observe(el));
 
-// ============================
-// PARTICLE BACKGROUND
-// ============================
+// ===== PARTICLE BACKGROUND =====
 const canvas = document.getElementById("particle-canvas");
 const ctx = canvas.getContext("2d");
 
-let particlesArray = [];
-const mouse = { x: null, y: null, radius: 100 };
+let particlesArray;
+const numParticles = 80;
 
-// Mouse interactivity
-window.addEventListener("mousemove", (e) => {
-  mouse.x = e.x;
-  mouse.y = e.y;
-});
-
-// Create particle objects
-function initParticles() {
-  particlesArray = [];
-  const numberOfParticles = (canvas.width * canvas.height) / 9000;
-
-  for (let i = 0; i < numberOfParticles; i++) {
-    const size = Math.random() * 2 + 1;
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
-    const directionX = (Math.random() - 0.5) * 0.4;
-    const directionY = (Math.random() - 0.5) * 0.4;
-    const color = "#b043ff"; // Slightly softer neon for better glow
-    particlesArray.push({ x, y, directionX, directionY, size, color });
-  }
-}
-
-// Animate particles
-function animateParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  for (let p of particlesArray) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fillStyle = p.color;
-    ctx.fill();
-
-    // Bounce off walls
-    if (p.x + p.size > canvas.width || p.x - p.size < 0) p.directionX = -p.directionX;
-    if (p.y + p.size > canvas.height || p.y - p.size < 0) p.directionY = -p.directionY;
-
-    // Move particle
-    p.x += p.directionX;
-    p.y += p.directionY;
-  }
-
-  requestAnimationFrame(animateParticles);
-}
-
-// Resize canvas dynamically
 function resizeCanvas() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  initParticles();
 }
-
 window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
-animateParticles();
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.size = Math.random() * 2 + 0.5;
+    this.speedX = Math.random() * 0.8 - 0.4;
+    this.speedY = Math.random() * 0.8 - 0.4;
+  }
+  update() {
+    this.x += this.speedX;
+    this.y += this.speedY;
+    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+  }
+  draw() {
+    ctx.fillStyle = "rgba(255,255,255,0.6)";
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function initParticles() {
+  particlesArray = [];
+  for (let i = 0; i < numParticles; i++) {
+    particlesArray.push(new Particle());
+  }
+}
+initParticles();
+
+function connectParticles() {
+  for (let a = 0; a < particlesArray.length; a++) {
+    for (let b = a; b < particlesArray.length; b++) {
+      const dx = particlesArray[a].x - particlesArray[b].x;
+      const dy = particlesArray[a].y - particlesArray[b].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 100) {
+        ctx.strokeStyle = `rgba(255,255,255,${1 - distance / 100})`;
+        ctx.lineWidth = 0.2;
+        ctx.beginPath();
+        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particlesArray.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  connectParticles();
+  requestAnimationFrame(animate);
+}
+animate();
