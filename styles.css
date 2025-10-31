@@ -12,14 +12,17 @@ body {
 #navbar {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 6%;
+  padding: 1rem 2rem;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(10px);
+  border-radius: 12px;
   z-index: 1000;
   transition: top 0.4s ease, background 0.3s ease;
 }
@@ -34,7 +37,7 @@ body {
 nav {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 nav a {
