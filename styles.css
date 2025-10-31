@@ -1,63 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
   background-color: #000;
   color: #c0c0c0;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-/* Navbar */
+/* ============================
+   NAVBAR
+============================ */
 #navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(10px);
   z-index: 1000;
   transition: top 0.4s ease, background 0.3s ease;
+  box-shadow: 0 1px 20px rgba(160, 32, 240, 0.1);
 }
 
 .nav-container {
   width: 90%;
   max-width: 1200px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0.8rem 0;
 }
 
 .logo {
   font-weight: 600;
-  color: #a020f0;
+  color: #b043ff; /* Neon purple */
   font-size: 1.4rem;
   letter-spacing: 1px;
 }
 
-nav {
+.nav-links {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
 
-nav a {
+.nav-links a {
   color: #c0c0c0;
   text-decoration: none;
   font-size: 1rem;
   transition: color 0.3s, text-shadow 0.3s;
 }
 
-nav a:hover {
-  color: #a020f0;
-  text-shadow: 0 0 8px #a020f0;
+.nav-links a:hover {
+  color: #b043ff;
+  text-shadow: 0 0 10px #b043ff;
 }
 
-/* Hero */
+/* ============================
+   HERO SECTION
+============================ */
 .hero {
   height: 100vh;
   display: flex;
@@ -71,6 +79,7 @@ nav a:hover {
 
 .hero-content {
   z-index: 1;
+  max-width: 700px;
 }
 
 #particle-canvas {
@@ -83,42 +92,52 @@ nav a:hover {
 }
 
 .hero h1 {
-  font-size: 2.8rem;
+  font-size: 3rem;
   color: #fff;
-  text-shadow: 0 0 20px #a020f0;
+  text-shadow: 0 0 25px #b043ff;
 }
 
 .hero p {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin: 1rem 0 2rem;
+  color: #d8d8d8;
 }
 
 .btn {
-  background-color: #a020f0;
+  background: linear-gradient(90deg, #b043ff, #7d3cff);
   color: #fff;
   padding: 0.8rem 1.8rem;
   border: none;
   border-radius: 30px;
   cursor: pointer;
-  transition: box-shadow 0.3s;
   text-decoration: none;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
-  box-shadow: 0 0 25px #a020f0;
+  box-shadow: 0 0 25px #b043ff;
+  transform: translateY(-3px);
 }
 
-/* Sections */
+/* ============================
+   SECTIONS
+============================ */
 section {
   padding: 6rem 10%;
   text-align: center;
 }
 
+h2 {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 0 10px #b043ff;
+}
+
 .service-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  gap: 1.8rem;
+  margin-top: 2.5rem;
 }
 
 .service-card {
@@ -130,7 +149,7 @@ section {
 
 .service-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 0 20px #a020f0;
+  box-shadow: 0 0 20px #b043ff;
 }
 
 ul {
@@ -140,9 +159,12 @@ ul {
 
 ul li {
   margin: 1rem 0;
+  font-weight: 300;
 }
 
-/* Contact Form */
+/* ============================
+   CONTACT FORM
+============================ */
 form {
   display: flex;
   flex-direction: column;
@@ -152,28 +174,41 @@ form {
   margin: auto;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 0.8rem;
   border: none;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
+  resize: none;
 }
 
 textarea {
   height: 120px;
 }
 
-/* Footer */
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+
+/* ============================
+   FOOTER
+============================ */
 footer {
   background: #111;
   text-align: center;
   padding: 1rem;
   font-size: 0.9rem;
+  color: #888;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Fade-in Effect */
+/* ============================
+   FADE-IN ANIMATIONS
+============================ */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -185,12 +220,19 @@ footer {
   transform: translateY(0);
 }
 
-/* Responsive */
+/* ============================
+   RESPONSIVE
+============================ */
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
-  nav {
+
+  .nav-links {
     display: none;
+  }
+
+  section {
+    padding: 4rem 5%;
   }
 }
