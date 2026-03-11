@@ -3,39 +3,538 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services | AQR Services</title>
+  <title>Services — AQR Services</title>
+  <meta name="description" content="Strategy-led creative and analytical services: presentations, dashboards, brand design, consulting, research, and content." />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* PAGE HERO */
+    .page-hero {
+      padding: 160px 48px 100px;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .page-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .page-hero-eyebrow-line { width: 40px; height: 1px; background: var(--white); }
+
+    .page-hero h1 {
+      font-size: clamp(60px, 9vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards;
+    }
+
+    .page-hero h1 em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    .page-hero-desc {
+      max-width: 560px;
+      color: rgba(255,255,255,0.5);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SERVICES MAIN */
+    .services-main {
+      border-top: 1px solid var(--border);
+    }
+
+    .service-row {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 80px 1fr 1.5fr auto;
+      gap: 40px;
+      align-items: start;
+      padding-top: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition);
+    }
+
+    .service-row:hover { background: rgba(255,255,255,0.02); }
+
+    .service-row-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+      padding-top: 4px;
+    }
+
+    .service-row-name {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .service-row-body { }
+
+    .service-row-body p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .service-row-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .service-row-arrow {
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all var(--transition);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .service-row:hover .service-row-arrow {
+      border-color: var(--white);
+      background: var(--white);
+      color: var(--black);
+      transform: rotate(45deg);
+    }
+
+    /* DELIVERABLES */
+    .deliverables-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .deliverables-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .deliv-card {
+      background: var(--black);
+      padding: 32px 28px;
+    }
+
+    .deliv-icon {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+
+    .deliv-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .deliv-desc {
+      font-size: 12px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* PROCESS */
+    .process-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .process-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .process-step {
+      background: var(--black);
+      padding: 40px 28px;
+      position: relative;
+    }
+
+    .step-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--dim);
+      margin-bottom: 20px;
+    }
+
+    .step-line {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .step-line::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 8px;
+      height: 8px;
+      background: var(--white);
+      border-radius: 50%;
+    }
+
+    .step-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step-desc {
+      font-size: 12px;
+      color: var(--dim);
+      line-height: 1.6;
+    }
+
+    /* CTA */
+    .services-cta {
+      border-top: 1px solid var(--border);
+      padding: 120px 0;
+      text-align: center;
+    }
+
+    .services-cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    @media (max-width: 1024px) {
+      .service-row { grid-template-columns: 60px 1fr; padding: 40px 32px; }
+      .service-row-body { grid-column: 1 / -1; }
+      .service-row-arrow { display: none; }
+      .deliverables-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 120px 24px 60px; }
+      .service-row { padding: 32px 24px; grid-template-columns: 1fr; gap: 16px; }
+      .service-row-num { display: none; }
+      .deliverables-inner { padding: 0 24px; }
+      .deliverables-grid { grid-template-columns: 1fr 1fr; }
+      .process-inner { padding: 0 24px; }
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-  <header id="navbar">
-    <div class="nav-container">
-      <div class="logo">AQR Services</div>
-      <nav class="nav-links">
-        <a href="/index.html">Home</a>
-<a href="/about.html">About</a>
-<a href="/services.html">Services</a>
-<a href="/edge.html">Edge</a>
-<a href="/mission.html">Mission</a>
-<a href="/contact.html">Contact</a>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<div class="scroll-indicator"></div>
+<div class="noise"></div>
+<canvas id="particles-canvas"></canvas>
 
-      </nav>
+<nav>
+  <a href="index.html" class="nav-logo"><span>AQR</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-index="01">Home</a></li>
+    <li><a href="about.html" data-index="02">About</a></li>
+    <li><a href="services.html" data-index="03">Services</a></li>
+    <li><a href="mission.html" data-index="04">Mission</a></li>
+    <li><a href="edge.html" data-index="05">Our Edge</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="mission.html">Mission</a>
+  <a href="edge.html">Our Edge</a>
+</div>
+
+<div class="page-wrap">
+
+  <section>
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line"></div>
+        <span class="label label-bright">What We Deliver</span>
+      </div>
+      <h1>Our <em>Services</em></h1>
+      <p class="page-hero-desc">
+        A suite of strategy-led creative and analytical services designed to help entrepreneurs, startups, and growing businesses operate with professional clarity.
+      </p>
     </div>
-  </header>
-
-  <section class="fade-in section">
-    <h1>Our Services</h1>
-    <p>We provide integrated digital solutions designed to elevate your business from strategy to execution.</p>
   </section>
 
-  <section class="fade-in section">
-    <h2>🚧 This page is currently in development</h2>
-    <p>We're refining every detail to bring you a fully interactive service experience soon.</p>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Pitch Decks</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Business Reports</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Dashboards</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Brand Identity</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Market Research</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Strategic Consulting</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Content Strategy</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Data Analysis</div>
+    </div>
+  </div>
+
+  <!-- SERVICES LIST -->
+  <section class="services-main">
+    <div class="service-row reveal">
+      <div class="service-row-num">01</div>
+      <div class="service-row-name">Strategic Presentations</div>
+      <div class="service-row-body">
+        <p>Board decks, pitch presentations, investor materials, and business reports designed with strategic clarity and visual precision. Every slide tells a story that supports your business objective.</p>
+        <div class="service-row-tags">
+          <span class="tag">Pitch Decks</span>
+          <span class="tag">Board Reports</span>
+          <span class="tag">Investor Materials</span>
+          <span class="tag">Company Profiles</span>
+        </div>
+      </div>
+      <div class="service-row-arrow">→</div>
+    </div>
+
+    <div class="service-row reveal reveal-delay-1">
+      <div class="service-row-num">02</div>
+      <div class="service-row-name">Operational Dashboards</div>
+      <div class="service-row-body">
+        <p>Custom business intelligence dashboards and data visualizations that transform raw numbers into actionable insight. Built in Excel, Google Sheets, Power BI, or Tableau.</p>
+        <div class="service-row-tags">
+          <span class="tag">Excel Dashboards</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">KPI Tracking</span>
+          <span class="tag">Data Viz</span>
+        </div>
+      </div>
+      <div class="service-row-arrow">→</div>
+    </div>
+
+    <div class="service-row reveal reveal-delay-2">
+      <div class="service-row-num">03</div>
+      <div class="service-row-name">Brand Design Systems</div>
+      <div class="service-row-body">
+        <p>Visual identity, brand guidelines, logo design, and complete design systems that create consistent, professional impressions across all your business touchpoints.</p>
+        <div class="service-row-tags">
+          <span class="tag">Logo Design</span>
+          <span class="tag">Brand Guidelines</span>
+          <span class="tag">Visual Identity</span>
+          <span class="tag">Design Systems</span>
+        </div>
+      </div>
+      <div class="service-row-arrow">→</div>
+    </div>
+
+    <div class="service-row reveal reveal-delay-3">
+      <div class="service-row-num">04</div>
+      <div class="service-row-name">Business Consulting</div>
+      <div class="service-row-body">
+        <p>Strategic planning, business model assessment, market entry analysis, and growth roadmaps. Agency-level consulting structured and accessible for startups and early-stage companies.</p>
+        <div class="service-row-tags">
+          <span class="tag">Strategic Planning</span>
+          <span class="tag">Growth Roadmaps</span>
+          <span class="tag">Business Models</span>
+          <span class="tag">Market Entry</span>
+        </div>
+      </div>
+      <div class="service-row-arrow">→</div>
+    </div>
+
+    <div class="service-row reveal reveal-delay-4">
+      <div class="service-row-num">05</div>
+      <div class="service-row-name">Content & Copywriting</div>
+      <div class="service-row-body">
+        <p>Business writing, marketing copy, LinkedIn content, website copy, and content strategy. Precise, purposeful language that communicates your value proposition with clarity.</p>
+        <div class="service-row-tags">
+          <span class="tag">Marketing Copy</span>
+          <span class="tag">LinkedIn Content</span>
+          <span class="tag">Web Copy</span>
+          <span class="tag">Content Strategy</span>
+        </div>
+      </div>
+      <div class="service-row-arrow">→</div>
+    </div>
+
+    <div class="service-row reveal reveal-delay-5">
+      <div class="service-row-num">06</div>
+      <div class="service-row-name">Research & Analysis</div>
+      <div class="service-row-body">
+        <p>Market research, competitive landscape analysis, industry reports, and feasibility studies. Data-backed deliverables that inform smarter, more confident business decisions.</p>
+        <div class="service-row-tags">
+          <span class="tag">Market Research</span>
+          <span class="tag">Competitor Analysis</span>
+          <span class="tag">Industry Reports</span>
+          <span class="tag">Feasibility Studies</span>
+        </div>
+      </div>
+      <div class="service-row-arrow">→</div>
+    </div>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section class="deliverables-section">
+    <div class="deliverables-inner">
+      <div class="reveal">
+        <span class="label">What You Receive</span>
+        <h2 style="margin-top: 16px;">Deliverable Formats</h2>
+      </div>
+      <div class="deliverables-grid">
+        <div class="deliv-card reveal reveal-delay-1"><div class="deliv-icon">📊</div><div class="deliv-name">PowerPoint / Google Slides</div><div class="deliv-desc">Professionally designed presentations, pitch decks, and reports.</div></div>
+        <div class="deliv-card reveal reveal-delay-2"><div class="deliv-icon">📈</div><div class="deliv-name">Excel / Google Sheets</div><div class="deliv-desc">Dynamic dashboards, financial models, and data trackers.</div></div>
+        <div class="deliv-card reveal reveal-delay-3"><div class="deliv-icon">🎨</div><div class="deliv-name">Design Files</div><div class="deliv-desc">Brand kits, visual systems, and design assets ready for use.</div></div>
+        <div class="deliv-card reveal reveal-delay-4"><div class="deliv-icon">📄</div><div class="deliv-name">PDF Reports</div><div class="deliv-desc">Research summaries, business analyses, and strategic briefs.</div></div>
+        <div class="deliv-card reveal reveal-delay-5"><div class="deliv-icon">✍️</div><div class="deliv-name">Written Documents</div><div class="deliv-desc">Copy, articles, proposals, and structured written content.</div></div>
+        <div class="deliv-card reveal reveal-delay-6"><div class="deliv-icon">🗺️</div><div class="deliv-name">Strategy Documents</div><div class="deliv-desc">Roadmaps, frameworks, action plans, and growth models.</div></div>
+        <div class="deliv-card reveal"><div class="deliv-icon">🔗</div><div class="deliv-name">Notion Workspaces</div><div class="deliv-desc">Organized digital workspaces for team or personal use.</div></div>
+        <div class="deliv-card reveal reveal-delay-1"><div class="deliv-icon">📱</div><div class="deliv-name">Social Media Kits</div><div class="deliv-desc">Templates, graphics, and content calendars for brand presence.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section">
+    <div class="process-inner">
+      <div class="reveal">
+        <span class="label">How We Work</span>
+        <h2 style="margin-top: 16px;">Our Process</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-num">STEP 01</div>
+          <div class="step-line"></div>
+          <div class="step-title">Discovery & Brief</div>
+          <div class="step-desc">Understanding your business objective, audience, and desired outcomes before any work begins.</div>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-num">STEP 02</div>
+          <div class="step-line"></div>
+          <div class="step-title">Strategy & Structure</div>
+          <div class="step-desc">Defining the strategic framework and information architecture that will guide the deliverable.</div>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-num">STEP 03</div>
+          <div class="step-line"></div>
+          <div class="step-title">Design & Execution</div>
+          <div class="step-desc">Producing the deliverable with precision — balancing aesthetics with analytical rigor.</div>
+        </div>
+        <div class="process-step reveal reveal-delay-4">
+          <div class="step-num">STEP 04</div>
+          <div class="step-line"></div>
+          <div class="step-title">Review & Refine</div>
+          <div class="step-desc">Iteration based on your feedback until the output achieves its intended business purpose.</div>
+        </div>
+        <div class="process-step reveal reveal-delay-5">
+          <div class="step-num">STEP 05</div>
+          <div class="step-line"></div>
+          <div class="step-title">Delivery & Support</div>
+          <div class="step-desc">Final handoff with file formats, usage guidelines, and post-delivery support as needed.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="services-cta">
+    <div class="services-cta-inner">
+      <div class="label reveal">Start Your Project</div>
+      <h2 class="reveal reveal-delay-1" style="margin: 20px 0 16px; font-size: clamp(36px, 5vw, 70px); line-height: 1;">
+        Ready to Work<br><em style="font-style:normal; -webkit-text-stroke: 1px white; color: transparent;">Together?</em>
+      </h2>
+      <p class="reveal reveal-delay-2" style="color: rgba(255,255,255,0.5); margin-bottom: 40px; font-size: 15px;">
+        Every project is handled with disciplined execution and a commitment to outcomes that extend beyond delivery.
+      </p>
+      <div class="reveal reveal-delay-3" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="about.html" class="btn btn-magnetic"><span>Meet the Founder</span><span class="btn-arrow">→</span></a>
+        <a href="edge.html" class="btn btn-ghost btn-magnetic"><span>Our Edge</span></a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 AQR Services | All Rights Reserved</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+        <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="edge.html">Our Edge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Presentations</a></li>
+          <li><a href="services.html">Dashboards</a></li>
+          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AQR Services. All rights reserved.</p>
+      <p>Srinagar, Jammu & Kashmir, India</p>
+    </div>
   </footer>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
