@@ -3,39 +3,536 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The AQR Edge | AQR Services</title>
+  <title>Our Edge — AQR Services</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-hero { padding: 160px 48px 100px; max-width: 1280px; margin: 0 auto; position: relative; }
+    .page-hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
+    .page-hero-eyebrow-line { width: 40px; height: 1px; background: var(--white); }
+    .page-hero h1 { font-size: clamp(60px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards; }
+    .page-hero h1 em { font-style: normal; -webkit-text-stroke: 1px var(--white); color: transparent; }
+    .page-hero-desc { max-width: 560px; color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.8; margin-top: 40px; opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* DIFFERENTIATORS */
+    .diff-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .diff-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .diff-grid {
+      margin-top: 64px;
+    }
+
+    .diff-row {
+      display: grid;
+      grid-template-columns: 60px 280px 1fr 1fr;
+      gap: 40px;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .diff-row:first-child { border-top: 1px solid var(--border); }
+
+    .diff-row-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+      padding-top: 4px;
+    }
+
+    .diff-row-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .diff-row-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+    }
+
+    .diff-row-vs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .vs-item {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      color: var(--dim);
+    }
+
+    .vs-item.positive {
+      border-color: rgba(255,255,255,0.3);
+      color: var(--white);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* COMPARISON TABLE */
+    .compare-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .compare-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 64px;
+    }
+
+    .compare-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-align: left;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-table th:first-child { padding-left: 0; }
+
+    .compare-table th.highlight {
+      color: var(--white);
+      border-bottom-color: var(--white);
+    }
+
+    .compare-table td {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      vertical-align: middle;
+    }
+
+    .compare-table td:first-child {
+      padding-left: 0;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .compare-table td.highlight {
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .check { color: var(--white); font-size: 16px; }
+    .cross { color: rgba(255,255,255,0.2); font-size: 16px; }
+    .partial { color: rgba(255,255,255,0.4); font-size: 16px; }
+
+    /* PROOF POINTS */
+    .proof-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .proof-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .proof-card {
+      background: var(--black);
+      padding: 56px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proof-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .proof-num {
+      font-family: var(--font-display);
+      font-size: 80px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+    }
+
+    .proof-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 16px;
+    }
+
+    .proof-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+
+    /* MANIFESTO */
+    .manifesto-section {
+      border-top: 1px solid var(--border);
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .manifesto-text {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.5;
+      max-width: 800px;
+      margin: 0 auto;
+      letter-spacing: -0.01em;
+    }
+
+    .manifesto-text em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    @media (max-width: 1024px) {
+      .diff-row { grid-template-columns: 1fr 1fr; }
+      .diff-row-num { display: none; }
+      .diff-row-vs { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 120px 24px 60px; }
+      .diff-inner, .compare-inner, .proof-inner { padding: 0 24px; }
+      .diff-row { grid-template-columns: 1fr; gap: 16px; }
+      .compare-table { display: none; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .manifesto-section { padding: 80px 24px; }
+    }
+  </style>
 </head>
 <body>
-  <header id="navbar">
-    <div class="nav-container">
-      <div class="logo">AQR Services</div>
-      <nav class="nav-links">
-        <a href="/index.html">Home</a>
-<a href="/about.html">About</a>
-<a href="/services.html">Services</a>
-<a href="/edge.html">Edge</a>
-<a href="/mission.html">Mission</a>
-<a href="/contact.html">Contact</a>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<div class="scroll-indicator"></div>
+<div class="noise"></div>
+<canvas id="particles-canvas"></canvas>
 
-      </nav>
+<nav>
+  <a href="index.html" class="nav-logo"><span>AQR</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-index="01">Home</a></li>
+    <li><a href="about.html" data-index="02">About</a></li>
+    <li><a href="services.html" data-index="03">Services</a></li>
+    <li><a href="mission.html" data-index="04">Mission</a></li>
+    <li><a href="edge.html" data-index="05">Our Edge</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="mission.html">Mission</a>
+  <a href="edge.html">Our Edge</a>
+</div>
+
+<div class="page-wrap">
+
+  <section>
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line"></div>
+        <span class="label label-bright">Why AQR</span>
+      </div>
+      <h1>The AQR <em>Edge</em></h1>
+      <p class="page-hero-desc">
+        What separates AQR Services from a typical freelancer or traditional agency — and why that difference matters for your business.
+      </p>
     </div>
-  </header>
-
-  <section class="fade-in section">
-    <h1>The AQR Edge</h1>
-    <p>What sets us apart isn’t just what we do — it’s how we do it. Data-driven creativity, consistency, and precision.</p>
   </section>
 
-  <section class="fade-in section">
-    <h2>🚧 This page is currently in development</h2>
-    <p>Our unique edge is being refined into a visual story. Coming soon.</p>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Hybrid Model</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Strategy-First</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Design + Data</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Founder-Led</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Startup-Friendly</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Agency-Grade Quality</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Long-Term Partner</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Measurable Outcomes</div>
+    </div>
+  </div>
+
+  <!-- DIFFERENTIATORS -->
+  <section class="diff-section">
+    <div class="diff-inner">
+      <div class="reveal">
+        <span class="label">What Sets Us Apart</span>
+        <h2 style="margin-top: 16px;">Our Differentiators</h2>
+      </div>
+      <div class="diff-grid">
+        <div class="diff-row reveal reveal-delay-1">
+          <div class="diff-row-num">01 —</div>
+          <div class="diff-row-title">Hybrid Consulting–Creative Model</div>
+          <div class="diff-row-desc">AQR operates at the rare intersection of creative execution and strategic consulting. You don't just get design OR strategy — you get both, fully integrated, in every deliverable.</div>
+          <div class="diff-row-vs">
+            <div class="vs-item positive">✓ Strategy + Design unified</div>
+            <div class="vs-item cross">✗ Freelancer: Design only</div>
+            <div class="vs-item cross">✗ Agency: Strategy siloed</div>
+          </div>
+        </div>
+        <div class="diff-row reveal reveal-delay-2">
+          <div class="diff-row-num">02 —</div>
+          <div class="diff-row-title">Founder-Led Accountability</div>
+          <div class="diff-row-desc">Every project is personally directed by the founder. No handoffs to junior staff, no diluted quality, no lost context. Your brief stays at the top of the priority stack.</div>
+          <div class="diff-row-vs">
+            <div class="vs-item positive">✓ Direct founder involvement</div>
+            <div class="vs-item cross">✗ Agency: Account managers</div>
+            <div class="vs-item partial">~ Freelancer: Solo but unstructured</div>
+          </div>
+        </div>
+        <div class="diff-row reveal reveal-delay-3">
+          <div class="diff-row-num">03 —</div>
+          <div class="diff-row-title">Business Objective First</div>
+          <div class="diff-row-desc">We always ask "what business outcome does this serve?" before touching a single design element or data point. Every visual decision is anchored to strategic purpose.</div>
+          <div class="diff-row-vs">
+            <div class="vs-item positive">✓ Objective-driven execution</div>
+            <div class="vs-item cross">✗ Most freelancers: Brief-only focus</div>
+            <div class="vs-item cross">✗ Many agencies: Process-driven</div>
+          </div>
+        </div>
+        <div class="diff-row reveal reveal-delay-4">
+          <div class="diff-row-num">04 —</div>
+          <div class="diff-row-title">Accessible Without Compromise</div>
+          <div class="diff-row-desc">Early-stage businesses shouldn't have to choose between professional quality and affordability. AQR was built to close that gap — agency thinking, startup pricing.</div>
+          <div class="diff-row-vs">
+            <div class="vs-item positive">✓ Agency quality, accessible cost</div>
+            <div class="vs-item partial">~ Freelancer: Affordable but inconsistent</div>
+            <div class="vs-item cross">✗ Agency: High cost for early stage</div>
+          </div>
+        </div>
+        <div class="diff-row reveal reveal-delay-5">
+          <div class="diff-row-num">05 —</div>
+          <div class="diff-row-title">Long-Term Growth Partnership</div>
+          <div class="diff-row-desc">AQR isn't just a vendor — we aim to understand your business deeply and evolve with you. Clients get a partner who knows their context, not a new contractor for every project.</div>
+          <div class="diff-row-vs">
+            <div class="vs-item positive">✓ Ongoing strategic partnership</div>
+            <div class="vs-item cross">✗ Freelancer: Project-by-project</div>
+            <div class="vs-item partial">~ Agency: Retainer model only</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section class="compare-section">
+    <div class="compare-inner">
+      <div class="reveal">
+        <span class="label">Head to Head</span>
+        <h2 style="margin-top: 16px;">AQR vs. The Alternatives</h2>
+      </div>
+      <table class="compare-table reveal reveal-delay-1">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Typical Freelancer</th>
+            <th>Traditional Agency</th>
+            <th class="highlight">AQR Services</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Strategy + Creative Integration</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="partial">~</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Data-Backed Deliverables</td>
+            <td><span class="partial">~</span></td>
+            <td><span class="partial">~</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Startup-Friendly Pricing</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Agency-Level Quality Standard</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="check">✓</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Founder-Led Accountability</td>
+            <td><span class="partial">~</span></td>
+            <td><span class="cross">✗</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Long-Term Growth Partnership</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="partial">~</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Consulting + Creative in One</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="partial">~</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Structural Agility</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✗</span></td>
+            <td class="highlight"><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PROOF POINTS -->
+  <section class="proof-section">
+    <div class="proof-inner">
+      <div class="reveal">
+        <span class="label">The Numbers</span>
+        <h2 style="margin-top: 16px;">By the Numbers</h2>
+      </div>
+      <div class="proof-grid">
+        <div class="proof-card reveal reveal-delay-1">
+          <div class="proof-num" data-target="3" data-suffix="">0</div>
+          <div class="proof-label">Disciplines in One</div>
+          <div class="proof-desc">Strategy, design, and data analytics — fully integrated into every engagement, not siloed into separate departments.</div>
+        </div>
+        <div class="proof-card reveal reveal-delay-2">
+          <div class="proof-num" data-target="100" data-suffix="%">0%</div>
+          <div class="proof-label">Objective-First</div>
+          <div class="proof-desc">Every single project begins with defining the business outcome. No exceptions.</div>
+        </div>
+        <div class="proof-card reveal reveal-delay-3">
+          <div class="proof-num" data-target="1" data-suffix="">0</div>
+          <div class="proof-label">Founder Involvement</div>
+          <div class="proof-desc">One point of contact, one accountable owner — the founder — for every project from brief to delivery.</div>
+        </div>
+        <div class="proof-card reveal reveal-delay-4">
+          <div class="proof-num">∞</div>
+          <div class="proof-label">Growth Potential</div>
+          <div class="proof-desc">Built from day one to scale with you — from first project to long-term strategic partnership.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto-section">
+    <div class="label reveal" style="margin-bottom: 40px;">The AQR Manifesto</div>
+    <div class="manifesto-text reveal reveal-delay-1">
+      "Whether it's a strategic presentation,<br>
+      operational dashboard, brand design system,<br>
+      or business report — AQR Services functions<br>
+      as a <em>modern execution partner</em> combining<br>
+      creative precision, analytical thinking,<br>
+      and consulting-driven direction to<br>
+      <em>move businesses forward.</em>"
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section style="border-top: 1px solid var(--border); padding: 100px 0; text-align: center;">
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 48px;">
+      <div class="label reveal">Ready to Experience the Edge?</div>
+      <h2 class="reveal reveal-delay-1" style="margin: 20px 0 40px; font-size: clamp(36px, 5vw, 70px); line-height: 1;">
+        Let's Build<br><em style="font-style:normal; -webkit-text-stroke: 1px white; color: transparent;">Together.</em>
+      </h2>
+      <div class="reveal reveal-delay-2" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="services.html" class="btn btn-magnetic"><span>View Services</span><span class="btn-arrow">→</span></a>
+        <a href="about.html" class="btn btn-ghost btn-magnetic"><span>Meet Arsalan</span></a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 AQR Services | All Rights Reserved</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+        <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="edge.html">Our Edge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Presentations</a></li>
+          <li><a href="services.html">Dashboards</a></li>
+          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AQR Services. All rights reserved.</p>
+      <p>Srinagar, Jammu & Kashmir, India</p>
+    </div>
   </footer>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
