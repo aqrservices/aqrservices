@@ -3,198 +3,558 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | AQR Services</title>
+  <title>About — AQR Services</title>
+  <meta name="description" content="Meet Arsalan Naqshbandi, founder of AQR Services — a business strategist combining design, analytics, and consulting to move businesses forward." />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      padding: 160px 48px 100px;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .page-hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .page-hero-eyebrow-line { width: 40px; height: 1px; background: var(--white); }
+
+    .page-hero h1 {
+      font-size: clamp(60px, 9vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: fadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards;
+    }
+
+    .page-hero h1 em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    .page-hero-desc {
+      max-width: 560px;
+      color: rgba(255,255,255,0.5);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== FOUNDER SECTION ===== */
+    .founder-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .founder-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .founder-visual {
+      position: relative;
+    }
+
+    .founder-card {
+      border: 1px solid var(--border);
+      padding: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founder-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--white);
+    }
+
+    .founder-initials {
+      font-family: var(--font-display);
+      font-size: 80px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      color: rgba(255,255,255,0.06);
+      position: absolute;
+      bottom: 20px;
+      right: 30px;
+    }
+
+    .founder-card .label { margin-bottom: 32px; }
+
+    .founder-card .name {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .founder-card .title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 32px;
+    }
+
+    .founder-card .bio {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+    }
+
+    .founder-details { margin-top: 32px; }
+    .founder-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .founder-detail-row .key {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .founder-detail-row .val { color: var(--white); font-weight: 500; }
+
+    .founder-content { }
+
+    .founder-content .label { margin-bottom: 16px; }
+    .founder-content h2 { margin-bottom: 32px; font-size: clamp(28px, 4vw, 48px); }
+    .founder-content p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .journey-list {
+      list-style: none;
+      margin: 40px 0;
+    }
+
+    .journey-item {
+      display: flex;
+      gap: 24px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .journey-item:first-child { border-top: 1px solid var(--border); }
+
+    .journey-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+      flex-shrink: 0;
+      width: 24px;
+      padding-top: 2px;
+    }
+
+    .journey-text .j-title {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .journey-text .j-desc {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.7;
+    }
+
+    /* ===== VISION SECTION ===== */
+    .vision-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+      position: relative;
+    }
+
+    .vision-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .vision-card {
+      background: var(--black);
+      padding: 56px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-card-num {
+      font-family: var(--font-display);
+      font-size: 100px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      position: absolute;
+      top: -10px;
+      right: 20px;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .vision-card .label { margin-bottom: 24px; }
+    .vision-card h3 { font-size: 28px; margin-bottom: 20px; }
+    .vision-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+    }
+
+    /* ===== PHILOSOPHY ===== */
+    .phil-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .phil-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .phil-list {
+      margin-top: 64px;
+      list-style: none;
+    }
+
+    .phil-list-item {
+      display: grid;
+      grid-template-columns: 60px 1fr 2fr;
+      gap: 40px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+    }
+
+    .phil-list-item:first-child { border-top: 1px solid var(--border); }
+
+    .phil-list-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+      padding-top: 4px;
+    }
+
+    .phil-list-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .phil-list-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 120px 24px 80px; }
+      .founder-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+      .founder-card { padding: 36px 28px; }
+      .vision-inner { padding: 0 24px; }
+      .vision-grid { grid-template-columns: 1fr; }
+      .phil-inner { padding: 0 24px; }
+      .phil-list-item { grid-template-columns: 1fr; gap: 12px; }
+    }
+  </style>
 </head>
 <body>
-  <!-- ===== HEADER ===== -->
-  <header id="navbar">
-    <div class="nav-container">
-      <div class="logo">AQR Services</div>
-      <div class="menu-toggle" id="menu-toggle">
-        <span></span><span></span><span></span>
-      </div>
-      <nav class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About</a>
-        <a href="services.html">Services</a>
-        <a href="edge.html">Edge</a>
-        <a href="mission.html">Mission</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-    </div>
-  </header>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<div class="scroll-indicator"></div>
+<div class="noise"></div>
+<canvas id="particles-canvas"></canvas>
 
-  <!-- ===== ABOUT HERO ===== -->
-  <section class="fade-in section">
-    <h1>About Arsalan Naqshbandi</h1>
-    <p>Emerging Business Strategist • Digital Creator • Founder of AQR Services</p>
-  </section>
+<nav>
+  <a href="index.html" class="nav-logo"><span>AQR</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-index="01">Home</a></li>
+    <li><a href="about.html" data-index="02">About</a></li>
+    <li><a href="services.html" data-index="03">Services</a></li>
+    <li><a href="mission.html" data-index="04">Mission</a></li>
+    <li><a href="edge.html" data-index="05">Our Edge</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
 
-  <!-- ===== PERSONAL INTRO ===== -->
-  <section class="fade-in section">
-    <h2>Personal Introduction</h2>
-    <p>
-      I’m <strong>Arsalan Naqshbandi</strong>, an emerging business strategist from <strong>Srinagar, Jammu & Kashmir</strong>,
-      currently pursuing a <strong>Bachelor of Business Administration (BBA)</strong> at The Islamia College of Science and Commerce.
-    </p>
-    <p>
-      I combine a sharp business mindset with creative problem-solving — working across digital marketing, business analysis,
-      and management consulting projects. My entrepreneurial journey began early through freelancing and co-founding creative ventures,
-      where I learned the practical side of leadership, team dynamics, and client management.
-    </p>
-    <p>
-      Driven by curiosity and ambition, I aim to build a global career in <strong>International Business and Management Consulting</strong>,
-      followed by a <strong>Doctorate in Business Administration (DBA)</strong> to deepen my expertise in strategic and organizational transformation.
-    </p>
-    <ul>
-      <li><strong>Location:</strong> Khanyar, Srinagar, J&K, India</li>
-      <li><strong>Phone:</strong> 6006717221</li>
-      <li><strong>Email:</strong> <a href="mailto:arsalannaqshbandi22@gmail.com">arsalannaqshbandi22@gmail.com</a></li>
-      <li><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/arsalan-naqshbandi-aa75a82a4" target="_blank">arsalan-naqshbandi-aa75a82a4</a></li>
-    </ul>
-  </section>
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="mission.html">Mission</a>
+  <a href="edge.html">Our Edge</a>
+</div>
 
-  <!-- ===== ACADEMIC PROFILE ===== -->
-  <section class="fade-in section">
-    <h2>Academic Profile</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>The Islamia College of Science and Commerce</h3>
-        <p><strong>BBA — 2024–Present</strong></p>
-        <ul>
-          <li>Focus on management, finance, accounting, and marketing.</li>
-          <li>Active in case-based learning and analytical assignments.</li>
-          <li>Foundation for postgraduate studies in International Business.</li>
-        </ul>
+<div class="page-wrap">
+
+  <!-- PAGE HERO -->
+  <section>
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line"></div>
+        <span class="label label-bright">About AQR Services</span>
       </div>
-      <div class="service-card">
-        <h3>Sri Pratap Higher Secondary School</h3>
-        <p><strong>Commerce Stream (2022–2024)</strong></p>
-        <ul>
-          <li>Specialized in Accounting, Business Studies, and Entrepreneurship.</li>
-          <li>Developed strong analytical and quantitative skills.</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>City Central Educational Institute</h3>
-        <p><strong>Primary & Secondary (2008–2021)</strong></p>
-        <ul>
-          <li>Completed foundational education with focus on discipline and extracurriculars.</li>
-        </ul>
-      </div>
+      <h1>Who We <em>Are</em></h1>
+      <p class="page-hero-desc">
+        A founder-driven consultancy operating at the intersection of strategy, design, and data — built to give modern businesses the professional edge they deserve.
+      </p>
     </div>
   </section>
 
-  <!-- ===== EXPERIENCE ===== -->
-  <section class="fade-in section">
-    <h2>Professional Experience</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>Freelance Social Media Manager & Blogger</h3>
-        <p>Specialized in content marketing, brand management, and analytics. Managed client accounts and optimized engagement through data insights.</p>
-      </div>
-      <div class="service-card">
-        <h3>Marpu Foundation (NGO) — Social Media Intern</h3>
-        <p>Aug 2024 – Sep 2024</p>
-        <p>Created promotional content, applied SEO strategies, and boosted audience engagement.</p>
-      </div>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Srinagar, J&K</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>BBA — Islamia College</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Business Strategy</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Design Execution</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Analytical Thinking</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Consulting Perspective</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>International Ambitions</div>
     </div>
-  </section>
+  </div>
 
-  <!-- ===== ENTREPRENEURIAL ===== -->
-  <section class="fade-in section">
-    <h2>Startup & Entrepreneurial Journey</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>Co-Founder – Trend Mosaic Media</h3>
-        <p>Youth-led freelance marketplace connecting creative talent with businesses.</p>
-        <ul>
-          <li>Hybrid service model with group and solo projects.</li>
-          <li>Strategic lead in operations and business development.</li>
-        </ul>
+  <!-- FOUNDER -->
+  <section class="founder-section">
+    <div class="founder-inner">
+      <div class="founder-visual reveal reveal-left">
+        <div class="founder-card">
+          <div class="founder-initials">AN</div>
+          <div class="label">Founder</div>
+          <div class="name">Arsalan Naqshbandi</div>
+          <div class="title">Founder & Business Strategist</div>
+          <div class="bio">
+            A founder-driven business strategist based in Srinagar, Jammu & Kashmir, currently pursuing a Bachelor of Business Administration (BBA) at The Islamia College of Science and Commerce.
+          </div>
+          <div class="founder-details">
+            <div class="founder-detail-row">
+              <span class="key">Based in</span>
+              <span class="val">Srinagar, J&K</span>
+            </div>
+            <div class="founder-detail-row">
+              <span class="key">Education</span>
+              <span class="val">BBA — Islamia College</span>
+            </div>
+            <div class="founder-detail-row">
+              <span class="key">Specialization</span>
+              <span class="val">Business Strategy</span>
+            </div>
+            <div class="founder-detail-row">
+              <span class="key">Long-Term Goal</span>
+              <span class="val">Int'l MBA + DBA</span>
+            </div>
+            <div class="founder-detail-row">
+              <span class="key">Focus</span>
+              <span class="val">Strategic Transformation</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="service-card">
-        <h3>Founder – AQR Services (2025–Present)</h3>
-        <p>Creative + Business service brand offering video editing, design, and analytics.</p>
-        <ul>
-          <li>Goal: Scale into a personal consulting brand merging creativity with strategy.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===== SKILLS ===== -->
-  <section class="fade-in section">
-    <h2>Professional Skills</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>Business & Analytical</h3>
-        <ul>
-          <li>Business Problem Solving</li>
-          <li>Data Analysis (Excel / Sheets)</li>
-          <li>Market & Competitor Analysis</li>
-          <li>Business Model Development</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Creative & Technical</h3>
-        <ul>
-          <li>Graphic & Presentation Design</li>
-          <li>Video Editing & Storytelling</li>
-          <li>Social Media Management</li>
-          <li>Content & Copywriting</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Digital Tools</h3>
-        <ul>
-          <li>Excel, Google Workspace, Canva, Figma</li>
-          <li>ChatGPT, Notion, Trello</li>
-        </ul>
-      </div>
-      <div class="service-card">
-        <h3>Soft Skills</h3>
-        <ul>
-          <li>Leadership & Communication</li>
-          <li>Critical Thinking</li>
-          <li>Adaptability</li>
-          <li>Public Speaking</li>
+      <div class="founder-content">
+        <div class="label reveal">Personal Introduction</div>
+        <h2 class="reveal reveal-delay-1">Founder-Led. Strategy-Driven.</h2>
+        <p class="reveal reveal-delay-2">
+          My journey began with freelancing and building early-stage ventures, where I developed hands-on experience in strategy execution, client growth planning, and team coordination.
+        </p>
+        <p class="reveal reveal-delay-3">
+          As the founder of AQR Services, I focus on combining business strategy, analytical thinking, and creative execution to help individuals and emerging businesses operate with professional structure and scalable direction.
+        </p>
+        <p class="reveal reveal-delay-4">
+          My long-term vision is to build a global career in International Business and Management Consulting, expanding my expertise through an international MBA and eventually a Doctorate in Business Administration (DBA) specializing in strategic transformation and organizational growth.
+        </p>
+        <ul class="journey-list">
+          <li class="journey-item reveal reveal-delay-2">
+            <span class="journey-num">01</span>
+            <div class="journey-text">
+              <div class="j-title">Freelancing & Early Ventures</div>
+              <div class="j-desc">Built hands-on experience in strategy execution, client growth planning, and team coordination through early-stage projects.</div>
+            </div>
+          </li>
+          <li class="journey-item reveal reveal-delay-3">
+            <span class="journey-num">02</span>
+            <div class="journey-text">
+              <div class="j-title">Founded AQR Services</div>
+              <div class="j-desc">Established a hybrid consulting–creative firm combining design, analytics, and strategy under one roof.</div>
+            </div>
+          </li>
+          <li class="journey-item reveal reveal-delay-4">
+            <span class="journey-num">03</span>
+            <div class="journey-text">
+              <div class="j-title">Academic Foundation</div>
+              <div class="j-desc">Pursuing BBA at The Islamia College of Science and Commerce, building theoretical underpinnings for strategic consulting.</div>
+            </div>
+          </li>
+          <li class="journey-item reveal reveal-delay-5">
+            <span class="journey-num">04</span>
+            <div class="journey-text">
+              <div class="j-title">Global Ambition</div>
+              <div class="j-desc">Aiming for international MBA and DBA, with a focus on strategic transformation and organizational growth consulting.</div>
+            </div>
+          </li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ===== CERTIFICATIONS ===== -->
-  <section class="fade-in section">
-    <h2>Certifications & Learning Highlights</h2>
-    <p>Completed a wide range of certifications in business, analytics, marketing, and creativity from global platforms (Google, Coursera, LinkedIn, and more).</p>
+  <!-- VISION/MISSION GRID -->
+  <section class="vision-section">
+    <div class="vision-inner">
+      <div class="reveal">
+        <span class="label">Our Direction</span>
+        <h2 style="margin-top: 16px;">Mission &amp; Vision</h2>
+      </div>
+      <div class="vision-grid">
+        <div class="vision-card reveal reveal-delay-1">
+          <div class="vision-card-num">01</div>
+          <div class="label">Mission</div>
+          <h3>Democratize Agency-Level Expertise</h3>
+          <p>To deliver strategy-aligned creative and analytical services that enable entrepreneurs, freelancers, and small businesses to operate with professional structure, informed decision-making, and scalable growth foundations.</p>
+        </div>
+        <div class="vision-card reveal reveal-delay-2">
+          <div class="vision-card-num">02</div>
+          <div class="label">Vision</div>
+          <h3>Globally Recognized Hybrid Firm</h3>
+          <p>To evolve AQR Services into a globally recognized hybrid consulting–creative firm, known for integrating business strategy, design intelligence, and analytical execution into a unified growth ecosystem for modern businesses.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- ===== FUTURE VISION ===== -->
-  <section class="fade-in section">
-    <h2>Career Vision & Academic Path</h2>
-    <p><strong>Phase 1:</strong> Complete BBA, grow AQR Services into a micro-consultancy.</p>
-    <p><strong>Phase 2:</strong> Pursue MBA in International Business abroad, specialize in strategic management.</p>
-    <p><strong>Phase 3:</strong> Earn a DBA focused on business transformation and consulting innovation.</p>
+  <!-- PHILOSOPHY -->
+  <section class="phil-section">
+    <div class="phil-inner">
+      <div class="reveal">
+        <span class="label">Our Operating Philosophy</span>
+        <h2 style="margin-top: 16px;">How We Think</h2>
+      </div>
+      <ul class="phil-list">
+        <li class="phil-list-item reveal reveal-delay-1">
+          <span class="phil-list-num">01 —</span>
+          <div class="phil-list-title">Strategy-Led Execution</div>
+          <div class="phil-list-desc">Every engagement begins with understanding the business objective. We design, analyze, and deliver solutions that serve a clear strategic purpose rather than isolated creative output.</div>
+        </li>
+        <li class="phil-list-item reveal reveal-delay-2">
+          <span class="phil-list-num">02 —</span>
+          <div class="phil-list-title">Hybrid Delivery Model</div>
+          <div class="phil-list-desc">Clients benefit from the flexibility of freelance collaboration combined with the structure, quality standards, and coordinated workflows of an agency environment.</div>
+        </li>
+        <li class="phil-list-item reveal reveal-delay-3">
+          <span class="phil-list-num">03 —</span>
+          <div class="phil-list-title">Insight-Driven Work</div>
+          <div class="phil-list-desc">From presentations and dashboards to branding and reports, our deliverables are guided by research, structured thinking, and data-backed decision-making.</div>
+        </li>
+        <li class="phil-list-item reveal reveal-delay-4">
+          <span class="phil-list-num">04 —</span>
+          <div class="phil-list-title">Accessible Professionalism</div>
+          <div class="phil-list-desc">We provide agency-level thinking at startup-friendly accessibility, enabling early-stage businesses to operate with professional clarity from day one.</div>
+        </li>
+        <li class="phil-list-item reveal reveal-delay-5">
+          <span class="phil-list-num">05 —</span>
+          <div class="phil-list-title">Growth Partnerships</div>
+          <div class="phil-list-desc">AQR works not only as a service provider but as a long-term execution partner, supporting clients across multiple stages of their growth journey.</div>
+        </li>
+      </ul>
+    </div>
   </section>
 
-  <!-- ===== PHILOSOPHY ===== -->
-  <section class="fade-in section">
-    <h2>Personal Philosophy</h2>
-    <blockquote>
-      “Every brand, like every person, has a story — the goal is to make that story worth remembering.”
-    </blockquote>
-    <p>
-      I believe in strategic creativity — combining business logic with creative execution. My journey reflects a balance between academic learning and entrepreneurship, preparing me for global consulting challenges.
-    </p>
+  <!-- CTA -->
+  <section style="border-top: 1px solid var(--border); padding: 100px 0; text-align: center;">
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 48px;">
+      <div class="label reveal">Ready to Collaborate?</div>
+      <h2 class="reveal reveal-delay-1" style="margin: 20px 0 40px; font-size: clamp(36px, 5vw, 72px);">Let's Build With<br><em style="font-style:normal; -webkit-text-stroke: 1px white; color: transparent;">Direction.</em></h2>
+      <div class="reveal reveal-delay-2" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="services.html" class="btn btn-magnetic"><span>View Services</span><span class="btn-arrow">→</span></a>
+        <a href="mission.html" class="btn btn-ghost btn-magnetic"><span>Our Mission</span></a>
+      </div>
+    </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer>
-    <p>© 2025 AQR Services | All Rights Reserved</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+        <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="edge.html">Our Edge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Presentations</a></li>
+          <li><a href="services.html">Dashboards</a></li>
+          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AQR Services. All rights reserved.</p>
+      <p>Srinagar, Jammu & Kashmir, India</p>
+    </div>
   </footer>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
