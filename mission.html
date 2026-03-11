@@ -3,39 +3,432 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission & Vision | AQR Services</title>
+  <title>Mission & Vision — AQR Services</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-hero {
+      padding: 160px 48px 100px;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .page-hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
+    .page-hero-eyebrow-line { width: 40px; height: 1px; background: var(--white); }
+    .page-hero h1 { font-size: clamp(60px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards; }
+    .page-hero h1 em { font-style: normal; -webkit-text-stroke: 1px var(--white); color: transparent; }
+    .page-hero-desc { max-width: 560px; color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.8; margin-top: 40px; opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* BIG STATEMENT */
+    .statement-section {
+      border-top: 1px solid var(--border);
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .big-statement {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      border-left: 2px solid var(--white);
+      padding-left: 40px;
+      max-width: 900px;
+    }
+
+    .big-statement em {
+      font-style: normal;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* MISSION / VISION FULL */
+    .mv-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .mv-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .mv-full-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 64px;
+    }
+
+    .mv-card {
+      border: 1px solid var(--border);
+      padding: 64px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mv-card-bg-num {
+      position: absolute;
+      bottom: -20px;
+      right: 20px;
+      font-family: var(--font-display);
+      font-size: 160px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .mv-card.revealed::before { transform: scaleX(1); }
+
+    .mv-card .label { margin-bottom: 28px; }
+    .mv-card h2 { font-size: clamp(24px, 3vw, 40px); margin-bottom: 28px; }
+    .mv-card p { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; }
+
+    /* COMMITMENT */
+    .commitment-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .commitment-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .commitment-text {
+      max-width: 800px;
+      margin: 48px 0 64px;
+      font-size: 18px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.9;
+    }
+
+    .commitment-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .pillar {
+      background: var(--black);
+      padding: 48px 36px;
+    }
+
+    .pillar-icon { font-size: 28px; margin-bottom: 20px; }
+    .pillar-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+    .pillar-desc { font-size: 13px; color: var(--dim); line-height: 1.7; }
+
+    /* TIMELINE */
+    .timeline-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .timeline-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .timeline {
+      margin-top: 64px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .tl-item {
+      padding: 0 0 56px 48px;
+      position: relative;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--white);
+      border-radius: 50%;
+    }
+
+    .tl-phase {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 12px;
+    }
+
+    .tl-title {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .tl-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 120px 24px 60px; }
+      .statement-section { padding: 80px 24px; }
+      .big-statement { padding-left: 24px; }
+      .mv-inner { padding: 0 24px; }
+      .mv-full-grid { grid-template-columns: 1fr; gap: 24px; }
+      .mv-card { padding: 40px 28px; }
+      .commitment-inner { padding: 0 24px; }
+      .commitment-pillars { grid-template-columns: 1fr; }
+      .timeline-inner { padding: 0 24px; }
+    }
+  </style>
 </head>
 <body>
-  <header id="navbar">
-    <div class="nav-container">
-      <div class="logo">AQR Services</div>
-      <nav class="nav-links">
-        <a href="/index.html">Home</a>
-<a href="/about.html">About</a>
-<a href="/services.html">Services</a>
-<a href="/edge.html">Edge</a>
-<a href="/mission.html">Mission</a>
-<a href="/contact.html">Contact</a>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<div class="scroll-indicator"></div>
+<div class="noise"></div>
+<canvas id="particles-canvas"></canvas>
 
-      </nav>
+<nav>
+  <a href="index.html" class="nav-logo"><span>AQR</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-index="01">Home</a></li>
+    <li><a href="about.html" data-index="02">About</a></li>
+    <li><a href="services.html" data-index="03">Services</a></li>
+    <li><a href="mission.html" data-index="04">Mission</a></li>
+    <li><a href="edge.html" data-index="05">Our Edge</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="mission.html">Mission</a>
+  <a href="edge.html">Our Edge</a>
+</div>
+
+<div class="page-wrap">
+
+  <section>
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+      <div class="page-hero-eyebrow">
+        <div class="page-hero-eyebrow-line"></div>
+        <span class="label label-bright">Purpose & Direction</span>
+      </div>
+      <h1>Mission &amp;<br><em>Vision</em></h1>
+      <p class="page-hero-desc">
+        The guiding principles, long-term direction, and foundational commitment that define everything AQR Services does.
+      </p>
     </div>
-  </header>
-
-  <section class="fade-in section">
-    <h1>Our Mission & Vision</h1>
-    <p>We aim to democratize high-end agency expertise and redefine the future of digital enablement.</p>
   </section>
 
-  <section class="fade-in section">
-    <h2>🚧 This page is currently in development</h2>
-    <p>We’re shaping this section to reflect our long-term vision and core purpose — coming soon.</p>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Precision</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Accountability</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Consistency</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Clarity</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Strategic Direction</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Real Business Value</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Measurable Impact</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Sustainable Growth</div>
+    </div>
+  </div>
+
+  <!-- BIG STATEMENT -->
+  <div class="statement-section">
+    <blockquote class="big-statement reveal">
+      "We do more than complete projects —<br>
+      we <em>build clarity, structure, and momentum</em><br>
+      for every client we work with."
+    </blockquote>
+  </div>
+
+  <!-- MISSION / VISION -->
+  <section class="mv-section">
+    <div class="mv-inner">
+      <div class="reveal">
+        <span class="label">Core Purpose</span>
+        <h2 style="margin-top: 16px;">Our Mission & Vision</h2>
+      </div>
+      <div class="mv-full-grid">
+        <div class="mv-card reveal reveal-delay-1">
+          <div class="mv-card-bg-num">M</div>
+          <div class="label">Mission</div>
+          <h2>Democratize Agency-Level Expertise</h2>
+          <p>
+            To deliver strategy-aligned creative and analytical services that enable entrepreneurs, freelancers, and small businesses to operate with professional structure, informed decision-making, and scalable growth foundations.
+          </p>
+          <p style="margin-top: 20px;">
+            We exist to make the gap between "freelancer-quality" and "agency-quality" disappear — putting enterprise-grade thinking within reach of every growing business.
+          </p>
+        </div>
+        <div class="mv-card reveal reveal-delay-2">
+          <div class="mv-card-bg-num">V</div>
+          <div class="label">Vision</div>
+          <h2>Globally Recognized Hybrid Firm</h2>
+          <p>
+            To become one of the world's most trusted growth partners, recognized for seamlessly merging creativity, analytics, and authentic brand-building to help modern businesses grow with clarity, innovation, and measurable impact.
+          </p>
+          <p style="margin-top: 20px;">
+            To evolve AQR Services into a globally recognized hybrid consulting–creative firm with a unified growth ecosystem for modern businesses.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMITMENT -->
+  <section class="commitment-section">
+    <div class="commitment-inner">
+      <div class="reveal">
+        <span class="label">Our Promise</span>
+        <h2 style="margin-top: 16px;">Our Commitment</h2>
+      </div>
+      <p class="commitment-text reveal reveal-delay-1">
+        Every engagement is handled with disciplined execution, forward-thinking insight, and a commitment to outcomes that extend beyond delivery. Professionalism at AQR is defined by three non-negotiables.
+      </p>
+      <div class="commitment-pillars">
+        <div class="pillar reveal reveal-delay-1">
+          <div class="pillar-icon">🎯</div>
+          <div class="pillar-title">Precision</div>
+          <div class="pillar-desc">Every deliverable is crafted with meticulous attention to detail, strategic alignment, and technical accuracy. No shortcuts, no half-measures.</div>
+        </div>
+        <div class="pillar reveal reveal-delay-2">
+          <div class="pillar-icon">⚖️</div>
+          <div class="pillar-title">Accountability</div>
+          <div class="pillar-desc">We take full ownership of every project, every deadline, and every outcome. Clients can rely on us to deliver what we commit to.</div>
+        </div>
+        <div class="pillar reveal reveal-delay-3">
+          <div class="pillar-icon">🔁</div>
+          <div class="pillar-title">Consistency</div>
+          <div class="pillar-desc">Quality doesn't vary project-to-project. Every client — regardless of scale — receives the same standard of care, strategy, and execution.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROWTH TIMELINE -->
+  <section class="timeline-section">
+    <div class="timeline-inner">
+      <div class="reveal">
+        <span class="label">The Journey Ahead</span>
+        <h2 style="margin-top: 16px;">Long-Term Vision</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal reveal-delay-1">
+          <div class="tl-phase">Phase 01 — Foundation</div>
+          <div class="tl-title">Establishing Core Services</div>
+          <div class="tl-desc">Building a strong foundation of repeatable, high-quality service delivery across design, analytics, and consulting for early clients.</div>
+        </div>
+        <div class="tl-item reveal reveal-delay-2">
+          <div class="tl-phase">Phase 02 — Scale</div>
+          <div class="tl-title">Growing the Client Portfolio</div>
+          <div class="tl-desc">Expanding the client base across markets, building long-term partnerships, and developing team and process infrastructure for scale.</div>
+        </div>
+        <div class="tl-item reveal reveal-delay-3">
+          <div class="tl-phase">Phase 03 — Recognition</div>
+          <div class="tl-title">Building Brand Authority</div>
+          <div class="tl-desc">Positioning AQR as a recognized name in hybrid consulting, with published content, case studies, and a clear market reputation.</div>
+        </div>
+        <div class="tl-item reveal reveal-delay-4">
+          <div class="tl-phase">Phase 04 — Global</div>
+          <div class="tl-title">International Expansion</div>
+          <div class="tl-desc">Evolving into a globally recognized firm serving clients across geographies, backed by a world-class team and cutting-edge methodologies.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="border-top: 1px solid var(--border); padding: 100px 0; text-align: center;">
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 48px;">
+      <div class="label reveal">Join the Journey</div>
+      <h2 class="reveal reveal-delay-1" style="margin: 20px 0 40px; font-size: clamp(36px, 5vw, 70px); line-height: 1;">
+        Something Greater<br>Is <em style="font-style:normal; -webkit-text-stroke: 1px white; color: transparent;">Taking Shape.</em>
+      </h2>
+      <div class="reveal reveal-delay-2" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="services.html" class="btn btn-magnetic"><span>Our Services</span><span class="btn-arrow">→</span></a>
+        <a href="edge.html" class="btn btn-ghost btn-magnetic"><span>Our Edge</span></a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 AQR Services | All Rights Reserved</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+        <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="edge.html">Our Edge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Presentations</a></li>
+          <li><a href="services.html">Dashboards</a></li>
+          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Consulting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AQR Services. All rights reserved.</p>
+      <p>Srinagar, Jammu & Kashmir, India</p>
+    </div>
   </footer>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
