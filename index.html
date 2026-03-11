@@ -3,120 +3,827 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AQR Services</title>
+  <title>AQR Services — Strategy-Led Creative & Analytical Consulting</title>
+  <meta name="description" content="AQR Services combines design execution, analytical thinking, and consulting perspective into a single workflow for startups and growing businesses." />
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 140px 48px 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.3s forwards;
+    }
+
+    .hero-eyebrow-line {
+      width: 40px;
+      height: 1px;
+      background: var(--white);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 9vw, 130px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .hero-line {
+      display: block;
+      overflow: hidden;
+    }
+
+    .hero-line-inner {
+      display: block;
+      transform: translateY(100%);
+      animation: slideUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+    }
+
+    .hero-line:nth-child(1) .hero-line-inner { animation-delay: 0.4s; }
+    .hero-line:nth-child(2) .hero-line-inner { animation-delay: 0.55s; }
+    .hero-line:nth-child(3) .hero-line-inner { animation-delay: 0.7s; }
+
+    .hero-line--outline {
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    .hero-sub-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 1s forwards;
+    }
+
+    .hero-desc {
+      max-width: 440px;
+      color: rgba(255,255,255,0.55);
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 1.4s forwards;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--white), transparent);
+      animation: scrollPulse 2s infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Scramble tagline */
+    .hero-scramble {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+      min-height: 1.5em;
+      margin-top: 16px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.25,0.46,0.45,0.94) 0.9s forwards;
+    }
+
+    /* ===== STATS SECTION ===== */
+    .stats {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .stat-item {
+      padding: 40px 0;
+      border-right: 1px solid var(--border);
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+
+    .stat-item:first-child { padding-left: 0; }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+
+    /* ===== SERVICES PREVIEW ===== */
+    .services-section {
+      padding: 120px 0;
+    }
+
+    .section-header {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 64px;
+    }
+
+    .section-header-left h2 { margin-top: 16px; }
+
+    .service-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .service-card {
+      background: var(--black);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition);
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: white;
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+      z-index: 0;
+    }
+
+    .service-card:hover::before { transform: scaleY(1); }
+    .service-card:hover { color: var(--black); }
+
+    .service-card:hover .service-num,
+    .service-card:hover .service-name,
+    .service-card:hover .service-desc { color: var(--black); }
+
+    .service-card:hover .service-tags .tag {
+      border-color: rgba(0,0,0,0.2);
+      color: rgba(0,0,0,0.6);
+    }
+
+    .service-card > * { position: relative; z-index: 1; }
+
+    .service-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.3);
+      transition: color var(--transition);
+    }
+
+    .service-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      transition: color var(--transition);
+    }
+
+    .service-desc {
+      font-size: 13px;
+      color: var(--dim);
+      line-height: 1.7;
+      flex: 1;
+      transition: color var(--transition);
+    }
+
+    .service-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+    .service-arrow {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: border-color var(--transition), transform var(--transition);
+      align-self: flex-end;
+    }
+
+    .service-card:hover .service-arrow {
+      border-color: var(--black);
+      transform: rotate(45deg);
+    }
+
+    /* ===== ABOUT SNIPPET ===== */
+    .about-section {
+      padding: 120px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-left { }
+
+    .about-left h2 { margin: 20px 0 32px; }
+
+    .about-left p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-right {
+      border: 1px solid var(--border);
+      padding: 48px;
+      position: relative;
+    }
+
+    .about-right::before {
+      content: '"';
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-family: var(--font-display);
+      font-size: 120px;
+      font-weight: 800;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .about-right blockquote {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      margin-bottom: 32px;
+    }
+
+    .about-founder {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .founder-avatar {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+
+    .founder-info .name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .founder-info .role {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* ===== PHILOSOPHY STRIP ===== */
+    .philosophy-section {
+      padding: 100px 0;
+      border-top: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .philosophy-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 64px;
+    }
+
+    .phil-item {
+      background: var(--black);
+      padding: 36px 28px;
+    }
+
+    .phil-icon {
+      font-size: 24px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .phil-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .phil-desc {
+      font-size: 12px;
+      color: var(--dim);
+      line-height: 1.7;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      padding: 120px 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(40px, 6vw, 90px);
+      margin: 20px 0 40px;
+      line-height: 1;
+    }
+
+    .cta-section h2 em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: 1px solid var(--border); padding-left: 0; }
+      .service-cards { grid-template-columns: 1fr 1fr; }
+      .about-inner { grid-template-columns: 1fr; gap: 48px; }
+      .philosophy-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .hero { padding: 120px 24px 80px; }
+      .hero-sub-row { flex-direction: column; align-items: flex-start; }
+      .hero-scroll-hint { left: 24px; }
+      .stats-grid { grid-template-columns: 1fr 1fr; padding: 0 24px; }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(3) { border-right: none; }
+      .service-cards { grid-template-columns: 1fr; padding: 0 24px; }
+      .section-header { padding: 0 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
+      .about-inner { padding: 0 24px; }
+      .about-right { padding: 32px 24px; }
+      .philosophy-inner { padding: 0 24px; }
+      .philosophy-grid { grid-template-columns: 1fr 1fr; }
+      .cta-actions { flex-direction: column; align-items: center; }
+    }
+  </style>
 </head>
 <body>
-  <!-- ===== HEADER ===== -->
-  <header id="navbar">
-    <div class="nav-container">
-      <div class="logo">AQR Services</div>
-      <header id="navbar">
-  <div class="nav-container">
-    <div class="logo">AQR Services</div>
 
-    <!-- 🌐 Hamburger toggle button -->
-    <div class="menu-toggle" id="menu-toggle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+<!-- CURSOR -->
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
 
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="edge.html">Edge</a>
-      <a href="mission.html">Mission</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
+<!-- SCROLL PROGRESS -->
+<div class="scroll-indicator"></div>
 
-     <nav class="nav-links">
-  <a href="/index.html">Home</a>
-<a href="/about.html">About</a>
-<a href="/services.html">Services</a>
-<a href="/edge.html">Edge</a>
-<a href="/mission.html">Mission</a>
-<a href="/contact.html">Contact</a>
+<!-- NOISE -->
+<div class="noise"></div>
+
+<!-- PARTICLES -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html" class="nav-logo"><span>AQR</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-index="01">Home</a></li>
+    <li><a href="about.html" data-index="02">About</a></li>
+    <li><a href="services.html" data-index="03">Services</a></li>
+    <li><a href="mission.html" data-index="04">Mission</a></li>
+    <li><a href="edge.html" data-index="05">Our Edge</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-    </div>
-  </header>
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="mission.html">Mission</a>
+  <a href="edge.html">Our Edge</a>
+</div>
 
-  <!-- ===== HERO SECTION ===== -->
-  <section id="home" class="hero fade-in">
-    <canvas id="particle-canvas"></canvas>
-    <div class="hero-content">
-      <h1>Building digital experiences that stand out.</h1>
-      <p>Creative precision. Data-driven strategy. Scalable growth.</p>
-      <a href="#services" class="btn">Explore Services</a>
-    </div>
-  </section>
+<!-- PAGE CONTENT -->
+<div class="page-wrap">
 
-  <!-- ===== ABOUT SECTION ===== -->
-  <section id="about" class="fade-in section">
-    <h2>The AQR Services Difference</h2>
-    <p>
-      AQR Services is the premier digital enablement agency for entrepreneurs, startups, and small businesses. 
-      We bridge creativity, data, and strategy into one seamless growth system.
-    </p>
-  </section>
+  <!-- HERO -->
+  <section>
+    <div class="hero">
+      <div class="grid-bg"></div>
 
-  <!-- ===== SERVICES SECTION ===== -->
-  <section id="services" class="fade-in section">
-    <h2>Our Core Service Domains</h2>
-    <div class="service-grid">
-      <div class="service-card">
-        <h3>Creative & Visual Identity</h3>
-        <p>From brand kits to video reels — we design visuals that make your brand unforgettable.</p>
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="label label-bright">Strategy · Design · Analysis</span>
       </div>
-      <div class="service-card">
-        <h3>Data Management & Business Intelligence</h3>
-        <p>We turn raw data into interactive dashboards and strategic insights that drive decisions.</p>
+
+      <h1 class="hero-headline glitch" data-text="BUILDING WITH DIRECTION">
+        <span class="hero-line"><span class="hero-line-inner">BUILD WITH</span></span>
+        <span class="hero-line hero-line--outline"><span class="hero-line-inner">DIRECTION.</span></span>
+        <span class="hero-line"><span class="hero-line-inner">DELIVER</span></span>
+      </h1>
+
+      <div class="hero-scramble" data-scramble="Strategy-Led Execution|Insight-Driven Work|Hybrid Delivery Model|Accessible Professionalism|Growth Partnerships">
+        Strategy-Led Execution
       </div>
-      <div class="service-card">
-        <h3>Content, Strategy & Reporting</h3>
-        <p>SEO content, reports, and social strategy crafted for growth and professional credibility.</p>
+
+      <div class="hero-sub-row">
+        <p class="hero-desc">
+          AQR Services is a hybrid consulting–creative firm helping individuals, startups, and growing businesses convert ideas into well-designed, insight-driven, and performance-focused outcomes.
+        </p>
+        <div class="hero-actions">
+          <a href="services.html" class="btn btn-magnetic">
+            <span>Our Services</span>
+            <span class="btn-arrow">→</span>
+          </a>
+          <a href="about.html" class="btn btn-ghost btn-magnetic">
+            <span>About Us</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-scroll-hint">
+        <div class="scroll-line"></div>
+        <span>Scroll to explore</span>
       </div>
     </div>
   </section>
 
-  <!-- ===== EDGE SECTION ===== -->
-  <section id="edge" class="fade-in section">
-    <h2>AQR's Professional Edge</h2>
-    <ul class="edge-list">
-      <li>Holistic Integration</li>
-      <li>Analytical Creativity</li>
-      <li>Efficiency & Reliability</li>
-      <li>Scalable Solutions</li>
-    </ul>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Strategy-Led Execution</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Hybrid Delivery Model</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Insight-Driven Work</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Accessible Professionalism</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Growth Partnerships</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Design Execution</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Analytical Thinking</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Consulting Perspective</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number" data-target="100" data-suffix="%">0%</div>
+        <div class="stat-label">Strategy-First Approach</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number" data-target="3" data-suffix="×">0×</div>
+        <div class="stat-label">Disciplines Integrated</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number" data-target="5" data-suffix="+">0+</div>
+        <div class="stat-label">Core Service Lines</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Growth Potential</div>
+      </div>
+    </div>
   </section>
 
-  <!-- ===== MISSION SECTION ===== -->
-  <section id="mission" class="fade-in section">
-    <h2>Mission & Vision</h2>
-    <p><strong>Mission:</strong> To democratize agency-level expertise and help entrepreneurs scale sustainably.</p>
-    <p><strong>Vision:</strong> To be the world’s most trusted growth partner — merging art, analytics, and authenticity.</p>
+  <!-- SERVICES PREVIEW -->
+  <section class="services-section">
+    <div class="section-header">
+      <div class="section-header-left reveal">
+        <span class="label">What We Do</span>
+        <h2>Core Services</h2>
+      </div>
+      <a href="services.html" class="btn btn-ghost reveal reveal-right">
+        <span>View All Services</span>
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+
+    <div class="service-cards">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-num">01</div>
+        <div class="service-name">Strategic Presentations</div>
+        <div class="service-desc">Board decks, pitch presentations, and business reports designed with strategic clarity and visual precision.</div>
+        <div class="service-tags">
+          <span class="tag">Pitch Decks</span>
+          <span class="tag">Reports</span>
+          <span class="tag">Boardroom</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-num">02</div>
+        <div class="service-name">Operational Dashboards</div>
+        <div class="service-desc">Data visualization and business intelligence dashboards that turn raw data into actionable insights.</div>
+        <div class="service-tags">
+          <span class="tag">Analytics</span>
+          <span class="tag">BI</span>
+          <span class="tag">Excel / Power BI</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-num">03</div>
+        <div class="service-name">Brand Design Systems</div>
+        <div class="service-desc">Visual identity and brand architecture that creates consistent, professional impressions across all touchpoints.</div>
+        <div class="service-tags">
+          <span class="tag">Identity</span>
+          <span class="tag">Branding</span>
+          <span class="tag">Visual Systems</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-num">04</div>
+        <div class="service-name">Business Consulting</div>
+        <div class="service-desc">Strategic planning, market analysis, and business development support for early-stage and growing ventures.</div>
+        <div class="service-tags">
+          <span class="tag">Strategy</span>
+          <span class="tag">Planning</span>
+          <span class="tag">Growth</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-5">
+        <div class="service-num">05</div>
+        <div class="service-name">Content & Copywriting</div>
+        <div class="service-desc">Business writing, marketing copy, and content strategy that communicates your value with precision.</div>
+        <div class="service-tags">
+          <span class="tag">Copywriting</span>
+          <span class="tag">Marketing</span>
+          <span class="tag">Content</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+
+      <div class="service-card reveal reveal-delay-6">
+        <div class="service-num">06</div>
+        <div class="service-name">Research & Analysis</div>
+        <div class="service-desc">Market research, competitive analysis, and data-backed reports to inform better business decisions.</div>
+        <div class="service-tags">
+          <span class="tag">Research</span>
+          <span class="tag">Data</span>
+          <span class="tag">Insights</span>
+        </div>
+        <div class="service-arrow">→</div>
+      </div>
+    </div>
   </section>
 
-  <!-- ===== CONTACT SECTION ===== -->
-  <section id="contact" class="fade-in section">
-    <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn">Send Message</button>
-    </form>
+  <!-- ABOUT SNIPPET -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="about-left">
+        <div class="label reveal">Who We Are</div>
+        <h2 class="reveal reveal-delay-1">Precision. Accountability. Consistency.</h2>
+        <p class="reveal reveal-delay-2">
+          AQR Services operates on a hybrid consulting–creative model, combining freelance agility with structured agency-level delivery.
+        </p>
+        <p class="reveal reveal-delay-3">
+          Founded to make professional business support accessible and strategic, AQR helps individuals, startups, and growing businesses convert ideas into well-designed, insight-driven outcomes.
+        </p>
+        <div class="reveal reveal-delay-4" style="margin-top: 32px;">
+          <a href="about.html" class="btn btn-magnetic">
+            <span>Learn More</span>
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+      </div>
+      <div class="about-right reveal reveal-right">
+        <blockquote>
+          "We build clarity, structure, and momentum for every client — not just complete projects."
+        </blockquote>
+        <div class="about-founder">
+          <div class="founder-avatar">AN</div>
+          <div class="founder-info">
+            <div class="name">Arsalan Naqshbandi</div>
+            <div class="role">Founder & Business Strategist</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
+  <!-- PHILOSOPHY STRIP -->
+  <section class="philosophy-section">
+    <div class="philosophy-inner">
+      <div class="section-header" style="padding: 0; margin-bottom: 0;">
+        <div class="reveal">
+          <span class="label">How We Work</span>
+          <h2 style="margin-top: 16px;">Operating Philosophy</h2>
+        </div>
+      </div>
+      <div class="philosophy-grid">
+        <div class="phil-item reveal reveal-delay-1">
+          <span class="phil-icon">⚡</span>
+          <div class="phil-title">Strategy-Led Execution</div>
+          <div class="phil-desc">Every engagement begins with understanding the business objective before any execution begins.</div>
+        </div>
+        <div class="phil-item reveal reveal-delay-2">
+          <span class="phil-icon">🔀</span>
+          <div class="phil-title">Hybrid Delivery</div>
+          <div class="phil-desc">Freelance flexibility combined with the structure and quality standards of an agency.</div>
+        </div>
+        <div class="phil-item reveal reveal-delay-3">
+          <span class="phil-icon">📊</span>
+          <div class="phil-title">Insight-Driven Work</div>
+          <div class="phil-desc">Deliverables guided by research, structured thinking, and data-backed decision-making.</div>
+        </div>
+        <div class="phil-item reveal reveal-delay-4">
+          <span class="phil-icon">🎯</span>
+          <div class="phil-title">Accessible Professionalism</div>
+          <div class="phil-desc">Agency-level thinking at startup-friendly accessibility from day one.</div>
+        </div>
+        <div class="phil-item reveal reveal-delay-5">
+          <span class="phil-icon">🌱</span>
+          <div class="phil-title">Growth Partnerships</div>
+          <div class="phil-desc">A long-term execution partner supporting clients across multiple stages of their growth journey.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="label reveal">Ready to Start?</div>
+      <h2 class="reveal reveal-delay-1">Something <em>Greater</em><br>Is Taking Shape.</h2>
+      <div class="cta-actions reveal reveal-delay-2">
+        <a href="services.html" class="btn btn-magnetic">
+          <span>Explore Services</span>
+          <span class="btn-arrow">→</span>
+        </a>
+        <a href="about.html" class="btn btn-ghost btn-magnetic">
+          <span>Meet the Founder</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>© 2025 AQR Services | All Rights Reserved</p>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+        <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="edge.html">Our Edge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Presentations</a></li>
+          <li><a href="services.html">Dashboards</a></li>
+          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Consulting</a></li>
+          <li><a href="services.html">Research</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Email Us</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AQR Services. All rights reserved.</p>
+      <p>Srinagar, Jammu & Kashmir, India</p>
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+</div><!-- /page-wrap -->
+
+<script src="script.js"></script>
 </body>
 </html>
