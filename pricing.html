@@ -1,536 +1,1040 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>Pricing — AQR Services</title>
-
-<link rel="stylesheet" href="styles.css">
-
-<style>
-
-/* PAGE HERO */
-
-.pricing-hero{
-padding:160px 48px 100px;
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:80px;
-align-items:end;
-}
-
-.pricing-hero h1{
-font-size:clamp(48px,7vw,92px);
-font-family:var(--font-display);
-line-height:1;
-margin-bottom:26px;
-}
-
-.pricing-hero p{
-font-size:15px;
-line-height:1.8;
-color:var(--dim);
-max-width:440px;
-}
-
-.hero-note{
-margin-top:24px;
-padding:16px 18px;
-border:1px solid var(--border);
-background:rgba(255,255,255,0.03);
-font-size:13px;
-color:var(--dim);
-}
-
-/* HERO STATS */
-
-.hero-right{
-display:flex;
-flex-direction:column;
-gap:24px;
-}
-
-.hero-stat-num{
-font-size:36px;
-font-family:var(--font-display);
-}
-
-.hero-stat-label{
-font-size:12px;
-color:var(--dim);
-}
-
-
-/* CURRENCY TOGGLE */
-
-.toggle-wrap{
-display:flex;
-justify-content:center;
-margin-bottom:60px;
-}
-
-.toggle-btn{
-border:1px solid var(--border);
-background:transparent;
-color:var(--dim);
-padding:12px 26px;
-font-size:13px;
-cursor:pointer;
-}
-
-.toggle-btn.active{
-background:white;
-color:black;
-}
-
-
-/* PRICING GRID */
-
-.tiers-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:1px;
-background:var(--border);
-}
-
-.tier-card{
-background:var(--black);
-padding:46px 38px;
-display:flex;
-flex-direction:column;
-gap:18px;
-transition:.35s;
-}
-
-.tier-card:hover{
-transform:translateY(-6px);
-background:#111;
-}
-
-.tier-card.highlighted{
-border:1px solid rgba(255,255,255,0.2);
-position:relative;
-}
-
-.popular-badge{
-position:absolute;
-top:20px;
-right:20px;
-font-size:10px;
-letter-spacing:.1em;
-background:white;
-color:black;
-padding:4px 10px;
-}
-
-/* TEXT */
-
-.tier-num{
-font-family:var(--font-mono);
-font-size:11px;
-color:var(--dim);
-}
-
-.tier-name{
-font-size:30px;
-font-family:var(--font-display);
-}
-
-.tier-for{
-font-size:13px;
-color:var(--dim);
-margin-bottom:12px;
-}
-
-.price-val{
-font-size:46px;
-font-family:var(--font-display);
-}
-
-.tier-divider{
-height:1px;
-background:var(--border);
-margin:14px 0;
-}
-
-/* FEATURES */
-
-.tier-features{
-list-style:none;
-display:flex;
-flex-direction:column;
-gap:8px;
-font-size:13px;
-color:var(--dim);
-}
-
-.tier-features span{
-color:white;
-}
-
-/* CTA */
-
-.tier-cta{
-margin-top:20px;
-text-decoration:none;
-border:1px solid var(--border);
-padding:12px 16px;
-font-size:13px;
-display:inline-block;
-}
-
-.tier-cta:hover{
-border-color:white;
-color:white;
-}
-
-
-/* FUNNEL */
-
-.funnel-section{
-padding:120px 48px;
-border-top:1px solid var(--border);
-}
-
-.funnel-inner{
-max-width:1200px;
-margin:auto;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:80px;
-}
-
-.step{
-margin-bottom:24px;
-}
-
-.step-title{
-font-size:14px;
-color:white;
-}
-
-.step-sub{
-font-size:12px;
-color:var(--dim);
-}
-
-
-/* POLICIES */
-
-.policies-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:1px;
-background:var(--border);
-margin-top:40px;
-}
-
-.policy-card{
-background:var(--black);
-padding:30px;
-}
-
-.policy-title{
-font-size:14px;
-color:white;
-margin-bottom:10px;
-}
-
-.policy-desc{
-font-size:13px;
-color:var(--dim);
-}
-
-
-/* CTA */
-
-.cta-banner{
-padding:120px 48px;
-text-align:center;
-border-top:1px solid var(--border);
-}
-
-.cta-banner h2{
-font-family:var(--font-display);
-font-size:clamp(40px,6vw,80px);
-line-height:1;
-margin-bottom:20px;
-}
-
-.cta-banner em{
-color:transparent;
--webkit-text-stroke:1px white;
-}
-
-
-/* RESPONSIVE */
-
-@media(max-width:1000px){
-
-.pricing-hero{
-grid-template-columns:1fr;
-gap:40px;
-padding:120px 24px 80px;
-}
-
-.tiers-grid{
-grid-template-columns:1fr;
-}
-
-.funnel-inner{
-grid-template-columns:1fr;
-}
-
-.policies-grid{
-grid-template-columns:1fr;
-}
-
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — AQR Services</title>
+  <meta name="description" content="Three engagement tiers. One standard of excellence. Strategy-led pricing for startups and growing businesses." />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+
+    /* ── HERO ── */
+    .page-hero {
+      padding: 160px 48px 100px;
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: priceFadeUp 0.7s ease 0.3s forwards;
+    }
+
+    .hero-eyebrow-line { width: 40px; height: 1px; background: var(--white); }
+
+    .page-hero h1 {
+      font-size: clamp(60px, 9vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      opacity: 0;
+      animation: priceFadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards;
+    }
+
+    .page-hero h1 em {
+      font-style: normal;
+      -webkit-text-stroke: 1px var(--white);
+      color: transparent;
+    }
+
+    .hero-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-top: 48px;
+      opacity: 0;
+      animation: priceFadeUp 0.8s ease 0.7s forwards;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 20px 24px;
+      border: 1px solid var(--border);
+      margin-top: 24px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .hero-note-icon { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+    .hero-note-text {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.7;
+    }
+
+    .hero-note-text strong { color: var(--white); }
+
+    .hero-stats { display: flex; flex-direction: column; }
+
+    .hero-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-stat:first-child { border-top: 1px solid var(--border); }
+
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      text-align: right;
+    }
+
+    @keyframes priceFadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── CURRENCY TOGGLE ── */
+    .toggle-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 64px 48px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .toggle-wrap {
+      display: flex;
+      border: 1px solid var(--border-bright);
+      overflow: hidden;
+    }
+
+    .toggle-btn {
+      padding: 14px 40px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: none;
+      border: none;
+      background: transparent;
+      color: var(--dim);
+      transition: all 0.3s;
+    }
+
+    .toggle-btn.active { background: var(--white); color: var(--black); }
+    .toggle-btn:not(.active):hover { color: var(--white); }
+
+    /* ── TIER CARDS ── */
+    .tiers-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 48px 0;
+    }
+
+    .tiers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .tier-card {
+      background: var(--black);
+      padding: 48px 36px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: background var(--transition);
+    }
+
+    .tier-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .tier-card:hover { background: rgba(255,255,255,0.03); }
+    .tier-card:hover::after { transform: scaleX(1); }
+
+    .tier-card.highlighted {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.2);
+      margin: -1px;
+      z-index: 1;
+    }
+
+    .tier-card.highlighted::after { transform: scaleX(1); }
+
+    .popular-badge {
+      position: absolute;
+      top: 20px; right: 20px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--white);
+      color: var(--black);
+      padding: 4px 10px;
+    }
+
+    .tier-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .tier-name {
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+
+    .tier-for {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+    }
+
+    .tier-price-block { margin-bottom: 28px; }
+
+    .price-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 8px;
+    }
+
+    .price-val {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .price-val .currency { font-size: 28px; color: rgba(255,255,255,0.5); font-weight: 700; }
+
+    .price-note {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+      margin-top: 8px;
+    }
+
+    .tier-divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+    .tier-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex: 1;
+    }
+
+    .tier-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.5;
+    }
+
+    .feature-check { color: var(--white); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+    .feature-dash  { color: var(--dim);   font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+
+    .tier-suited {
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .suited-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 4px;
+    }
+
+    .suited-text { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; font-style: italic; }
+
+    .tier-cta {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      padding: 14px 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      color: var(--dim);
+      background: transparent;
+      transition: all 0.3s;
+      margin-top: auto;
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tier-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--white);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+      z-index: 0;
+    }
+
+    .tier-cta:hover::before { transform: scaleX(1); }
+    .tier-cta:hover { color: var(--black); border-color: var(--white); }
+    .tier-cta span { position: relative; z-index: 1; }
+
+    .tier-cta.cta-primary {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    /* ── COMPARISON TABLE ── */
+    .comp-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border);
+    }
+
+    .comp-table th, .comp-table td {
+      padding: 16px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .comp-table th {
+      background: rgba(255,255,255,0.03);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dim);
+      font-weight: 400;
+    }
+
+    .comp-table th.highlight { color: var(--white); border-bottom: 1px solid var(--white); }
+    .comp-table td { color: rgba(255,255,255,0.45); background: var(--black); }
+    .comp-table td.row-label { color: var(--white); font-weight: 500; font-family: var(--font-display); }
+    .comp-table td.highlight { color: var(--white); background: rgba(255,255,255,0.03); }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .comp-table tr:hover td { background: rgba(255,255,255,0.025); }
+    .comp-table tr:hover td.highlight { background: rgba(255,255,255,0.05); }
+    .check-y { color: var(--white); }
+    .check-n { color: var(--dim); }
+
+    /* ── FUNNEL ── */
+    .funnel-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .funnel-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .funnel-steps { display: flex; flex-direction: column; }
+
+    .funnel-step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    .funnel-step:not(:last-child) .step-line {
+      position: absolute;
+      left: 19px; top: 44px; bottom: -4px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .step-node { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+
+    .step-circle {
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--black);
+      color: var(--dim);
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+
+    .step-circle.c-active { border-color: rgba(255,255,255,0.4); color: var(--white); background: rgba(255,255,255,0.06); }
+    .step-circle.c-final  { border-color: var(--white); background: var(--white); color: var(--black); }
+
+    .step-body { padding: 8px 0 28px; flex: 1; }
+    .step-title { font-size: 14px; color: var(--white); font-weight: 500; font-family: var(--font-display); line-height: 1.3; }
+    .step-sub   { font-size: 12px; color: var(--dim); margin-top: 4px; line-height: 1.5; font-family: var(--font-mono); letter-spacing: 0.04em; }
+
+    .fork-row { display: flex; gap: 10px; margin: -8px 0 20px 60px; }
+
+    .fork-tag {
+      flex: 1; padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      display: flex; flex-direction: column; gap: 3px;
+    }
+
+    .fork-tag-title { font-size: 11px; font-weight: 600; color: var(--white); font-family: var(--font-display); }
+    .fork-tag-sub   { font-size: 10px; color: var(--dim); font-family: var(--font-mono); letter-spacing: 0.06em; }
+
+    .funnel-right h3 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .funnel-right h3 em { font-style: normal; -webkit-text-stroke: 1px var(--white); color: transparent; }
+    .funnel-right p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.85; margin-bottom: 16px; }
+    .funnel-right p.hp { color: rgba(255,255,255,0.8); }
+
+    .wa-cta-block { margin-top: 36px; border: 1px solid var(--border); }
+
+    .wa-cta-link {
+      display: flex; align-items: center; gap: 16px;
+      padding: 20px 24px; text-decoration: none;
+      transition: background var(--transition), border-left-color var(--transition);
+      border-left: 2px solid transparent;
+    }
+
+    .wa-cta-link:hover { background: rgba(255,255,255,0.04); border-left-color: var(--white); }
+
+    .wa-cta-icon {
+      width: 40px; height: 40px;
+      background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .wa-cta-body { flex: 1; }
+    .wa-cta-body strong { display: block; font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 2px; }
+    .wa-cta-body span   { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; color: var(--dim); }
+    .wa-cta-arrow { font-size: 16px; color: var(--dim); transition: color var(--transition), transform var(--transition); }
+    .wa-cta-link:hover .wa-cta-arrow { color: var(--white); transform: translateX(4px); }
+
+    /* ── POLICIES ── */
+    .policies-section { border-top: 1px solid var(--border); padding: 100px 0; }
+
+    .policies-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+
+    .policies-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 64px;
+    }
+
+    .policy-card {
+      background: var(--black); padding: 36px 28px;
+      transition: background var(--transition);
+      position: relative; overflow: hidden;
+    }
+
+    .policy-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px; background: var(--white);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+
+    .policy-card:hover { background: rgba(255,255,255,0.03); }
+    .policy-card:hover::before { transform: scaleX(1); }
+
+    .policy-icon { font-size: 20px; margin-bottom: 16px; }
+    .policy-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .policy-desc { font-size: 13px; color: var(--dim); line-height: 1.75; }
+    .policy-desc strong { color: rgba(255,255,255,0.7); }
+
+    /* ── CTA BANNER ── */
+    .cta-banner { border-top: 1px solid var(--border); padding: 120px 0; text-align: center; }
+
+    .cta-banner-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+
+    .cta-banner h2 { font-size: clamp(36px, 5vw, 72px); line-height: 1; margin: 20px 0 16px; }
+    .cta-banner h2 em { font-style: normal; -webkit-text-stroke: 1px var(--white); color: transparent; }
+    .cta-banner p { font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.8; margin-bottom: 8px; }
+    .cta-sig { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--dim); margin-bottom: 40px !important; }
+
+    .cta-wa-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 18px 40px; background: #25D366; color: var(--white);
+      text-decoration: none; font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase;
+      transition: all 0.3s; cursor: none;
+    }
+
+    .cta-wa-btn:hover { background: #20b858; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(37,211,102,0.35); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .page-hero { padding: 140px 32px 80px; }
+      .hero-row { grid-template-columns: 1fr; gap: 40px; }
+      .toggle-section, .tiers-section, .comp-section, .policies-inner, .cta-banner-inner { padding-left: 32px; padding-right: 32px; }
+      .tiers-grid { grid-template-columns: 1fr; }
+      .tier-card.highlighted { margin: 0; }
+      .funnel-inner { grid-template-columns: 1fr; gap: 48px; padding: 0 32px; }
+      .policies-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .page-hero { padding: 120px 24px 60px; }
+      .toggle-section, .tiers-section, .comp-section, .policies-inner { padding-left: 24px; padding-right: 24px; }
+      .toggle-btn { padding: 12px 24px; }
+      .funnel-inner { padding: 0 24px; }
+      .policies-grid { grid-template-columns: 1fr; }
+      .fork-row { flex-direction: column; }
+    }
+
+  </style>
 </head>
-
-
 <body>
 
+<!-- CURSOR + PARTICLES (same as all pages via styles.css + script.js) -->
 <div class="cursor"></div>
 <div class="cursor-follower"></div>
 <div class="scroll-indicator"></div>
 <div class="noise"></div>
 <canvas id="particles-canvas"></canvas>
 
-
+<!-- NAV -->
 <nav>
-
-<a href="index.html" class="nav-logo">AQR</a>
-
-<ul class="nav-links">
-<li><a href="index.html">Home</a></li>
-<li><a href="about.html">About</a></li>
-<li><a href="services.html">Services</a></li>
-<li><a href="work.html">Work</a></li>
-<li><a href="pricing.html" class="active">Pricing</a></li>
-<li><a href="mission.html">Mission</a></li>
-<li><a href="edge.html">Our Edge</a></li>
-</ul>
-
+  <a href="index.html" class="nav-logo"><span>AQR</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html" data-index="01">Home</a></li>
+    <li><a href="about.html" data-index="02">About</a></li>
+    <li><a href="services.html" data-index="03">Services</a></li>
+    <li><a href="mission.html" data-index="04">Mission</a></li>
+    <li><a href="pricing.html" data-index="05">Pricing</a></li>
+    <li><a href="edge.html" data-index="06">Our Edge</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-
-
-<section class="pricing-hero">
-
-<div class="reveal">
-
-<h1>Three Tiers.<br><em>One Standard.</em></h1>
-
-<p>
-Choose the engagement level that matches your business stage.
-All tiers deliver the same consulting-led thinking — the scope
-and depth scales with your needs.
-</p>
-
-<div class="hero-note">
-✦ Exact pricing shared on inquiry. Ranges shown here are starting points
-for self-qualification — final pricing is scoped after a free discovery conversation.
+<div class="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="services.html">Services</a>
+  <a href="mission.html">Mission</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="edge.html">Our Edge</a>
 </div>
 
-</div>
-
-
-<div class="hero-right reveal">
-
-<div class="hero-stat">
-<div class="hero-stat-num">3</div>
-<div class="hero-stat-label">Engagement Tiers</div>
-</div>
-
-<div class="hero-stat">
-<div class="hero-stat-num">2×</div>
-<div class="hero-stat-label">Currency Markets — INR & USD</div>
-</div>
-
-<div class="hero-stat">
-<div class="hero-stat-num">Free</div>
-<div class="hero-stat-label">Discovery Call — Always</div>
-</div>
-
-</div>
-
-</section>
-
-
-
-<section class="container">
-
-<div class="toggle-wrap">
-
-<button class="toggle-btn active" onclick="setCurrency('inr')">₹ India (INR)</button>
-<button class="toggle-btn" onclick="setCurrency('usd')">$ International (USD)</button>
-
-</div>
-
-
-<div class="tiers-grid">
-
-<!-- STARTER -->
-
-<div class="tier-card reveal">
-
-<div class="tier-num">01 — STARTER</div>
-
-<div class="tier-name">Starter</div>
-
-<div class="tier-for">For solopreneurs & early-stage projects</div>
-
-<div class="price-val inr">₹799</div>
-<div class="price-val usd" style="display:none">$20</div>
-
-<div class="tier-divider"></div>
-
-<ul class="tier-features">
-
-<li><span>✓</span> Fixed-price deliverables</li>
-<li><span>✓</span> Direct execution by Arsalan</li>
-<li><span>✓</span> Ideal for single-service work</li>
-<li><span>✓</span> 1 revision round included</li>
-<li>— Strategy layer not included</li>
-
-</ul>
-
-<a href="#" class="tier-cta">Start with Starter →</a>
-
-</div>
-
-
-<!-- GROWTH -->
-
-<div class="tier-card highlighted reveal">
-
-<span class="popular-badge">Most Popular</span>
-
-<div class="tier-num">02 — GROWTH</div>
-
-<div class="tier-name">Growth</div>
-
-<div class="tier-for">For startups & businesses needing bundled solutions</div>
-
-<div class="price-val inr">₹4,999</div>
-<div class="price-val usd" style="display:none">$90</div>
-
-<div class="tier-divider"></div>
-
-<ul class="tier-features">
-
-<li><span>✓</span> Multi-service packages</li>
-<li><span>✓</span> Strategy-led execution</li>
-<li><span>✓</span> Clear deliverables</li>
-<li><span>✓</span> 2 revision rounds</li>
-<li><span>✓</span> Strategy layer included</li>
-
-</ul>
-
-<a href="#" class="tier-cta">Start with Growth →</a>
-
-</div>
-
-
-<!-- PARTNER -->
-
-<div class="tier-card reveal">
-
-<div class="tier-num">03 — PARTNER</div>
-
-<div class="tier-name">Partner</div>
-
-<div class="tier-for">For businesses wanting premium execution</div>
-
-<div class="price-val inr">₹9,999</div>
-<div class="price-val usd" style="display:none">$180</div>
-
-<div class="tier-divider"></div>
-
-<ul class="tier-features">
-
-<li><span>✓</span> Full strategic execution</li>
-<li><span>✓</span> Deep-dive consulting</li>
-<li><span>✓</span> Priority turnaround</li>
-<li><span>✓</span> Unlimited revisions</li>
-<li><span>✓</span> Retainer model</li>
-
-</ul>
-
-<a href="#" class="tier-cta">Start with Partner →</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-
-<section class="cta-banner">
-
-<div class="reveal">
-
-<h2>Tell me what you're trying<br><em>to achieve.</em></h2>
-
-<p>
-I'll personally review your needs and recommend the best solution —
-no templates, no auto-replies.
-</p>
-
-<p style="margin-top:10px;color:var(--dim)">
-— Arsalan, Founder, AQR Services
-</p>
-
-</div>
-
-</section>
-
-
-
-<footer>
-
-<div class="footer-inner">
-
-<div class="footer-brand">
-<a href="index.html">AQR Services</a>
-<p>Hybrid consulting–creative firm combining strategy, design and analytics.</p>
-</div>
-
-</div>
-
-</footer>
-
-
-
-<script src="script.js"></script>
-
+<div class="page-wrap">
+
+  <!-- ══ HERO ══ -->
+  <section>
+    <div class="page-hero">
+      <div class="grid-bg"></div>
+
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-line"></div>
+        <span class="label label-bright">Think Like a Consultant. Execute Like an Agency.</span>
+      </div>
+
+      <h1>Three Tiers.<br><em>One Standard.</em></h1>
+
+      <div class="hero-row">
+        <div>
+          <p class="hero-desc">
+            Choose the engagement level that matches your business stage. All tiers deliver the same consulting-led thinking — the scope and depth scales with your needs.
+          </p>
+          <div class="hero-note">
+            <span class="hero-note-icon">✦</span>
+            <p class="hero-note-text"><strong>Exact pricing confirmed on inquiry.</strong> Ranges shown here are for self-qualification — final pricing is scoped after a free discovery conversation based on your specific requirements.</p>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat reveal reveal-right reveal-delay-1">
+            <div class="hero-stat-num" data-target="3" data-suffix="">0</div>
+            <div class="hero-stat-label">Engagement Tiers</div>
+          </div>
+          <div class="hero-stat reveal reveal-right reveal-delay-2">
+            <div class="hero-stat-num" data-target="2" data-suffix="×">0×</div>
+            <div class="hero-stat-label">Currency Markets · INR &amp; USD</div>
+          </div>
+          <div class="hero-stat reveal reveal-right reveal-delay-3">
+            <div class="hero-stat-num">Free</div>
+            <div class="hero-stat-label">Discovery Call · Always</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MARQUEE ══ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item"><div class="marquee-dot"></div>Starter — From ₹799 / $20</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Growth — From ₹4,999 / $90</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Partner — From ₹9,999 / $180</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Free Discovery Call</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Think Like a Consultant</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Execute Like an Agency</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>INR &amp; USD Markets</div>
+      <div class="marquee-item"><div class="marquee-dot"></div>Strategy-Led Pricing</div>
+    </div>
+  </div>
+
+  <!-- ══ CURRENCY TOGGLE ══ -->
+  <div class="toggle-section reveal">
+    <span class="label">Select Your Currency</span>
+    <div class="toggle-wrap">
+      <button class="toggle-btn inr active" onclick="setCurrency('inr')">₹ India (INR)</button>
+      <button class="toggle-btn usd" onclick="setCurrency('usd')">$ International (USD)</button>
+    </div>
+  </div>
+
+  <!-- ══ TIER CARDS ══ -->
+  <div class="tiers-section">
+    <div class="tiers-grid">
+
+      <!-- STARTER -->
+      <div class="tier-card reveal reveal-delay-1">
+        <div class="tier-num">01 — STARTER</div>
+        <div class="tier-name">Starter</div>
+        <div class="tier-for">For solopreneurs &amp; early-stage projects</div>
+        <div class="tier-price-block">
+          <div class="price-label">Starting from</div>
+          <div class="price-val inr-price"><span class="currency">₹</span>799</div>
+          <div class="price-val usd-price" style="display:none;"><span class="currency">$</span>20</div>
+          <div class="price-note">Full payment upfront · No surprises</div>
+        </div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li class="tier-feature"><span class="feature-check">✓</span> Fixed-price, fast-turnaround deliverables</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Direct execution by Arsalan — Solo Mode</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Ideal for single-service requirements</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Perfect for building trust before larger projects</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> 1 revision round included</li>
+          <li class="tier-feature"><span class="feature-dash">—</span> <span style="color:var(--dim)">Strategy layer not included</span></li>
+        </ul>
+        <div class="tier-suited">
+          <div class="suited-label">Best Suited For</div>
+          <div class="suited-text inr-suited">Individuals, students, early founders, local businesses</div>
+          <div class="suited-text usd-suited" style="display:none;">Freelancers, consultants, early founders, international solopreneurs</div>
+        </div>
+        <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'm%20interested%20in%20the%20Starter%20tier%20at%20AQR%20Services." target="_blank" class="tier-cta"><span>Start with Starter →</span></a>
+      </div>
+
+      <!-- GROWTH -->
+      <div class="tier-card highlighted reveal reveal-delay-2">
+        <span class="popular-badge">Most Popular</span>
+        <div class="tier-num">02 — GROWTH</div>
+        <div class="tier-name">Growth</div>
+        <div class="tier-for">For startups &amp; businesses needing bundled solutions</div>
+        <div class="tier-price-block">
+          <div class="price-label">Starting from</div>
+          <div class="price-val inr-price"><span class="currency">₹</span>4,999</div>
+          <div class="price-val usd-price" style="display:none;"><span class="currency">$</span>90</div>
+          <div class="price-note">50% advance · 50% on delivery</div>
+        </div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li class="tier-feature"><span class="feature-check">✓</span> Bundled multi-service packages — complete solutions</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Strategy-led by AQR, executed via hybrid model</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Higher perceived value with clear deliverables</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Quality review before every delivery</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> 2 revision rounds included</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Strategy layer included</li>
+        </ul>
+        <div class="tier-suited">
+          <div class="suited-label">Best Suited For</div>
+          <div class="suited-text inr-suited">Growing startups, SMEs, D2C brands, brand launches</div>
+          <div class="suited-text usd-suited" style="display:none;">International startups, e-commerce brands, agency owners, global SMEs</div>
+        </div>
+        <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'm%20interested%20in%20the%20Growth%20tier%20at%20AQR%20Services." target="_blank" class="tier-cta cta-primary"><span>Start with Growth →</span></a>
+      </div>
+
+      <!-- PARTNER -->
+      <div class="tier-card reveal reveal-delay-3">
+        <div class="tier-num">03 — PARTNER</div>
+        <div class="tier-name">Partner</div>
+        <div class="tier-for">For businesses wanting premium, full-scope execution</div>
+        <div class="tier-price-block">
+          <div class="price-label">Starting from</div>
+          <div class="price-val inr-price"><span class="currency">₹</span>9,999</div>
+          <div class="price-val usd-price" style="display:none;"><span class="currency">$</span>180</div>
+          <div class="price-note">50% advance · 50% on delivery</div>
+        </div>
+        <div class="tier-divider"></div>
+        <ul class="tier-features">
+          <li class="tier-feature"><span class="feature-check">✓</span> Full strategic execution across multiple deliverables</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Deep-dive strategy layer on every project</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Priority turnaround on all requests</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Quality review at every stage before delivery</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Unlimited revisions within scope</li>
+          <li class="tier-feature"><span class="feature-check">✓</span> Monthly retainer model available</li>
+        </ul>
+        <div class="tier-suited">
+          <div class="suited-label">Best Suited For</div>
+          <div class="suited-text inr-suited">Scaling businesses, funded startups, serious brand builders</div>
+          <div class="suited-text usd-suited" style="display:none;">Scaling businesses, funded startups, serious brand builders</div>
+        </div>
+        <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'm%20interested%20in%20the%20Partner%20tier%20at%20AQR%20Services." target="_blank" class="tier-cta"><span>Start with Partner →</span></a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ COMPARISON TABLE ══ -->
+  <div class="comp-section" style="margin-top: 1px; padding-top: 0;">
+    <table class="comp-table reveal">
+      <thead>
+        <tr>
+          <th style="width:28%;">Feature</th>
+          <th>Starter</th>
+          <th class="highlight">Growth</th>
+          <th>Partner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Starting Price</td>
+          <td class="inr-show">From ₹799</td>
+          <td class="highlight inr-show">From ₹4,999</td>
+          <td class="inr-show">From ₹9,999</td>
+          <td class="usd-show" style="display:none;">From $20</td>
+          <td class="highlight usd-show" style="display:none;">From $90</td>
+          <td class="usd-show" style="display:none;">From $180</td>
+        </tr>
+        <tr>
+          <td class="row-label">Project Type</td>
+          <td>Single deliverable</td>
+          <td class="highlight">Multi-service bundle</td>
+          <td>Monthly retainer</td>
+        </tr>
+        <tr>
+          <td class="row-label">Execution Mode</td>
+          <td>Direct by Arsalan</td>
+          <td class="highlight">AQR hybrid model</td>
+          <td>Full-service + strategy</td>
+        </tr>
+        <tr>
+          <td class="row-label">Revisions</td>
+          <td>1 round</td>
+          <td class="highlight">2 rounds</td>
+          <td>Unlimited in scope</td>
+        </tr>
+        <tr>
+          <td class="row-label">Turnaround</td>
+          <td>Fast &amp; fixed</td>
+          <td class="highlight">Standard timeline</td>
+          <td>Priority lane</td>
+        </tr>
+        <tr>
+          <td class="row-label">Strategy Layer</td>
+          <td><span class="check-n">—</span></td>
+          <td class="highlight"><span class="check-y">✓ Included</span></td>
+          <td><span class="check-y">✓ Deep-dive</span></td>
+        </tr>
+        <tr>
+          <td class="row-label">Payment Terms</td>
+          <td>Full upfront</td>
+          <td class="highlight">50% + 50%</td>
+          <td>50% + 50%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <section class="funnel-section">
+    <div class="funnel-inner">
+
+      <div>
+        <span class="label reveal">How It Works</span>
+        <h2 class="reveal reveal-delay-1" style="margin: 16px 0 40px; font-size: clamp(28px,4vw,48px);">From <em>First Contact</em><br>to Work Begun.</h2>
+
+        <div class="funnel-steps">
+          <div class="funnel-step reveal reveal-delay-1">
+            <div class="step-line"></div>
+            <div class="step-node"><div class="step-circle">01</div></div>
+            <div class="step-body">
+              <div class="step-title">Land on website &amp; view services</div>
+              <div class="step-sub">Browse offerings and pricing ranges for self-qualification</div>
+            </div>
+          </div>
+
+          <div class="fork-row">
+            <div class="fork-tag"><span class="fork-tag-title">🌐 International</span><span class="fork-tag-sub">USD tier table</span></div>
+            <div class="fork-tag"><span class="fork-tag-title">🇮🇳 India</span><span class="fork-tag-sub">INR tier table</span></div>
+          </div>
+
+          <div class="funnel-step reveal reveal-delay-2">
+            <div class="step-line"></div>
+            <div class="step-node"><div class="step-circle c-active">02</div></div>
+            <div class="step-body">
+              <div class="step-title">Reach out via WhatsApp</div>
+              <div class="step-sub">Share a rough brief — no formal form required</div>
+            </div>
+          </div>
+
+          <div class="funnel-step reveal reveal-delay-3">
+            <div class="step-line"></div>
+            <div class="step-node"><div class="step-circle c-active">03</div></div>
+            <div class="step-body">
+              <div class="step-title">Discovery Conversation</div>
+              <div class="step-sub">Scope, timeline, and objectives clarified — tailored per service vertical</div>
+            </div>
+          </div>
+
+          <div class="funnel-step reveal reveal-delay-4">
+            <div class="step-line"></div>
+            <div class="step-node"><div class="step-circle c-active">04</div></div>
+            <div class="step-body">
+              <div class="step-title">Draft Proposal Sent</div>
+              <div class="step-sub">Scope, timeline, and pricing confirmed — no ambiguity</div>
+            </div>
+          </div>
+
+          <div class="funnel-step reveal reveal-delay-5">
+            <div class="step-line"></div>
+            <div class="step-node"><div class="step-circle c-active">05</div></div>
+            <div class="step-body">
+              <div class="step-title">Agreement &amp; Advance Payment</div>
+              <div class="step-sub">50% advance on approval (Starter: full upfront)</div>
+            </div>
+          </div>
+
+          <div class="funnel-step reveal reveal-delay-6">
+            <div class="step-node"><div class="step-circle c-final">06</div></div>
+            <div class="step-body" style="padding-bottom:0;">
+              <div class="step-title">Work Begins — Delivery in Motion</div>
+              <div class="step-sub">Full execution starts. You get a partner, not a vendor.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="funnel-right reveal reveal-right">
+        <h3>No guesswork.<br><em>No cold surprises.</em></h3>
+        <p>The AQR client acquisition process is designed around one principle: by the time you pay, you know exactly what you're getting — and why it's priced the way it is.</p>
+        <p>Pricing ranges are shown for self-qualification. Exact pricing is confirmed only after a discovery conversation where scope, timeline, and objectives are fully understood.</p>
+        <p>This isn't gatekeeping — it's how good consulting works. A pitch deck for a pre-seed startup and one for a Series A company are not the same project, even if they look the same on a menu.</p>
+        <p class="hp">Every inquiry gets a personal response from Arsalan. No templates, no auto-replies, no junior hand-offs.</p>
+
+        <div class="wa-cta-block">
+          <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20AQR%20Services." target="_blank" class="wa-cta-link">
+            <div class="wa-cta-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div class="wa-cta-body">
+              <strong>WhatsApp — Fastest Response</strong>
+              <span>+91 6006 464058</span>
+            </div>
+            <span class="wa-cta-arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ PRICING POLICIES ══ -->
+  <section class="policies-section">
+    <div class="policies-inner">
+      <div class="reveal">
+        <span class="label">Policies &amp; Terms</span>
+        <h2 style="margin-top:16px; font-size:clamp(32px,4vw,56px);">Pricing <span style="-webkit-text-stroke:1px white;color:transparent;">Policies</span></h2>
+        <p class="reveal reveal-delay-1" style="color:rgba(255,255,255,0.45); margin-top:12px; font-size:14px; max-width:500px;">Clear, upfront terms — no hidden fees, no post-delivery surprises.</p>
+      </div>
+      <div class="policies-grid">
+        <div class="policy-card reveal reveal-delay-1">
+          <div class="policy-icon">⚡</div>
+          <div class="policy-title">Rush Delivery Fee</div>
+          <p class="policy-desc"><strong>+30–50%</strong> on base price for turnarounds under 48 hours. Accepted subject to current capacity — always confirm availability first.</p>
+        </div>
+        <div class="policy-card reveal reveal-delay-2">
+          <div class="policy-icon">🔄</div>
+          <div class="policy-title">Revision Policy</div>
+          <p class="policy-desc"><strong>Starter:</strong> 1 round · <strong>Growth:</strong> 2 rounds · <strong>Partner:</strong> Unlimited within agreed scope. Scope changes are quoted separately.</p>
+        </div>
+        <div class="policy-card reveal reveal-delay-3">
+          <div class="policy-icon">🎯</div>
+          <div class="policy-title">Custom Projects</div>
+          <p class="policy-desc">Quoted after a <strong>free discovery call</strong> — no standard package required. Complex multi-vertical engagements are always scoped individually.</p>
+        </div>
+        <div class="policy-card reveal reveal-delay-4">
+          <div class="policy-icon">📊</div>
+          <div class="policy-title">Margin Principle</div>
+          <p class="policy-desc">All projects priced to maintain a <strong>40–60% agency margin</strong> after execution costs — ensuring sustainable quality on every engagement.</p>
+        </div>
+        <div class="policy-card reveal reveal-delay-5">
+          <div class="policy-icon">💳</div>
+          <div class="policy-title">Payment Terms</div>
+          <p class="policy-desc"><strong>Starter:</strong> Full upfront · <strong>Growth &amp; Partner:</strong> 50% advance, 50% on delivery. International payments via Wise or PayPal (USD). GST applicable per Indian norms.</p>
+        </div>
+        <div class="policy-card reveal reveal-delay-6">
+          <div class="policy-icon">🔒</div>
+          <div class="policy-title">Confidentiality</div>
+          <p class="policy-desc">All client information and briefs treated with <strong>complete confidentiality</strong>. NDA available on request for sensitive engagements.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA BANNER ══ -->
+  <section class="cta-banner">
+    <div class="cta-banner-inner">
+      <div class="label reveal">Ready to Start?</div>
+      <h2 class="reveal reveal-delay-1">Tell me what you're<br>trying to <em>achieve.</em></h2>
+      <p class="reveal reveal-delay-2">I'll personally review your needs and recommend the best solution — no templates, no auto-replies.</p>
+      <p class="cta-sig reveal reveal-delay-3">— Arsalan, Founder, AQR Services</p>
+      <div class="reveal reveal-delay-4">
+        <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20AQR%20Services." target="_blank" class="cta-wa-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+        <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="mission.html">Mission</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="edge.html">Our Edge</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Presentations</a></li>
+          <li><a href="services.html">Dashboards</a></li>
+          <li><a href="services.html">Social Media</a></li>
+          <li><a href="services.html">Consulting</a></li>
+          <li><a href="services.html">Research</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#">LinkedIn</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="https://wa.me/916006464058" target="_blank">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 AQR Services. All rights reserved.</p>
+      <p>Srinagar, Jammu &amp; Kashmir, India</p>
+    </div>
+  </footer>
+
+</div><!-- /page-wrap -->
+
+<!-- WHATSAPP FLOAT BUTTON -->
+<a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20AQR%20Services." target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="26" height="26"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span class="wa-label">WhatsApp</span>
+</a>
+<style>
+.wa-float { position:fixed; bottom:32px; right:32px; z-index:9000; display:flex; align-items:center; gap:10px; background:#25D366; color:white; padding:14px 20px; border-radius:50px; text-decoration:none; font-size:13px; font-weight:600; letter-spacing:0.03em; box-shadow:0 4px 24px rgba(37,211,102,0.4),0 2px 8px rgba(0,0,0,0.3); transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94); font-family:var(--font-mono); }
+.wa-float:hover { background:#20b858; transform:translateY(-3px); box-shadow:0 8px 32px rgba(37,211,102,0.5),0 4px 16px rgba(0,0,0,0.3); }
+.wa-label { white-space:nowrap; }
+@media(max-width:640px) { .wa-float .wa-label{display:none;} .wa-float{padding:14px;border-radius:50%;} }
+</style>
+
+<!-- CURRENCY TOGGLE SCRIPT -->
 <script>
-
-function setCurrency(cur){
-
-document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'))
-
-event.target.classList.add('active')
-
-const inr = cur==="inr"
-
-document.querySelectorAll('.inr').forEach(el=>el.style.display=inr?"":"none")
-document.querySelectorAll('.usd').forEach(el=>el.style.display=inr?"none":"")
-
-}
-
+  function setCurrency(cur) {
+    const isInr = cur === 'inr';
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.toggle-btn.' + cur).classList.add('active');
+    document.querySelectorAll('.inr-price').forEach(el => el.style.display = isInr ? '' : 'none');
+    document.querySelectorAll('.usd-price').forEach(el => el.style.display = isInr ? 'none' : '');
+    document.querySelectorAll('.inr-suited').forEach(el => el.style.display = isInr ? '' : 'none');
+    document.querySelectorAll('.usd-suited').forEach(el => el.style.display = isInr ? 'none' : '');
+    document.querySelectorAll('.inr-show').forEach(el => el.style.display = isInr ? '' : 'none');
+    document.querySelectorAll('.usd-show').forEach(el => el.style.display = isInr ? 'none' : '');
+  }
 </script>
 
+<!-- SHARED SCRIPT (cursor, particles, scroll reveal, counter, marquee) -->
+<script src="script.js"></script>
 
 </body>
 </html>
