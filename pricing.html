@@ -1,1365 +1,536 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pricing — AQR Services</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg:          #0a0a0b;
-      --bg-card:     #111114;
-      --bg-hover:    #16161a;
-      --border:      #1e1e24;
-      --border-light:#2a2a32;
-      --accent:      #c8a96e;
-      --accent-dim:  #8a6e3e;
-      --text:        #e8e6e0;
-      --text-muted:  #7a7875;
-      --text-dim:    #4a4845;
-      --white:       #f5f3ef;
-      --tag-bg:      #1a1a20;
-      --blue:        #7eb8f7;
-      --teal:        #5eead4;
-      --purple:      #c084fc;
-      --green:       #a8e6a3;
-      --radius:      4px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'DM Sans', sans-serif; font-size: 15px;
-      line-height: 1.7; -webkit-font-smoothing: antialiased;
-    }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; height: 64px;
-      background: rgba(10,10,11,0.92); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--white); text-decoration: none; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--white); }
-    .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
-    .nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--text-muted); margin: 5px 0; }
-    .nav-mobile { display: none; position: fixed; top: 64px; left: 0; right: 0; background: var(--bg); border-bottom: 1px solid var(--border); padding: 24px 48px; z-index: 99; }
-    .nav-mobile.open { display: block; }
-    .nav-mobile a { display: block; text-decoration: none; color: var(--text-muted); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 0; border-bottom: 1px solid var(--border); font-weight: 500; }
-    .nav-mobile a:last-child { border-bottom: none; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-    /* ── LAYOUT ── */
-    section { padding: 100px 48px; }
-    .container { max-width: 1200px; margin: 0 auto; }
-    .section-label { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
-    .section-title { font-family: 'DM Serif Display', serif; font-size: clamp(32px,4vw,48px); color: var(--white); font-weight: 400; line-height: 1.15; }
-    .section-title em { font-style: italic; color: var(--accent); }
-    .section-desc { color: var(--text-muted); font-size: 15px; max-width: 560px; margin-top: 16px; line-height: 1.8; }
-    .divider { width: 100%; height: 1px; background: var(--border); }
+<title>Pricing — AQR Services</title>
 
-    /* ── HERO ── */
-    .hero { padding: 140px 48px 80px; }
-    .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; }
-    .hero h1 { font-family: 'DM Serif Display', serif; font-size: clamp(44px,6vw,72px); color: var(--white); font-weight: 400; line-height: 1.08; }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-sub { color: var(--text-muted); font-size: 15px; line-height: 1.8; margin-top: 24px; max-width: 420px; }
-    .hero-note {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 16px 20px; background: rgba(200,169,110,0.05);
-      border: 1px solid rgba(200,169,110,0.15); border-radius: var(--radius);
-      margin-top: 28px;
-    }
-    .hero-note-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
-    .hero-note-text { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
-    .hero-note-text strong { color: var(--accent); }
-    .hero-right { display: flex; flex-direction: column; gap: 20px; padding-bottom: 8px; }
-    .hero-stat { border-left: 2px solid var(--border-light); padding-left: 20px; }
-    .hero-stat-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--white); }
-    .hero-stat-num em { font-style: italic; color: var(--accent); }
-    .hero-stat-label { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; margin-top: 2px; }
+<link rel="stylesheet" href="styles.css">
 
-    /* ── CURRENCY TOGGLE ── */
-    .toggle-wrap {
-      display: flex; align-items: center; justify-content: center;
-      gap: 0; margin-bottom: 56px;
-      border: 1px solid var(--border-light); width: fit-content; margin-left: auto; margin-right: auto;
-    }
-    .toggle-btn {
-      padding: 12px 32px; font-size: 13px; font-weight: 500;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      cursor: pointer; border: none; transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .toggle-btn.inr { background: var(--bg-card); color: var(--text-muted); }
-    .toggle-btn.usd { background: var(--bg-card); color: var(--text-muted); }
-    .toggle-btn.active { background: var(--accent); color: var(--bg); }
+<style>
 
-    /* ── TIER CARDS ── */
-    .tiers-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: var(--border); border: 1px solid var(--border);
-      margin-bottom: 1px;
-    }
-    .tier-card {
-      background: var(--bg-card); padding: 44px 36px;
-      display: flex; flex-direction: column;
-      position: relative; overflow: hidden;
-      transition: background 0.25s;
-    }
-    .tier-card:hover { background: var(--bg-hover); }
-    .tier-card.highlighted {
-      background: #0e0e12;
-      border: 1px solid rgba(200,169,110,0.3);
-      margin: -1px;
-      z-index: 1;
-    }
-    .tier-card.highlighted::before {
-      content: '';
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 2px; background: var(--accent);
-    }
-    .popular-badge {
-      position: absolute; top: 20px; right: 20px;
-      font-family: 'Space Mono', monospace; font-size: 9px;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      background: var(--accent); color: var(--bg);
-      padding: 4px 10px; border-radius: 2px;
-    }
-    .tier-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 20px; }
-    .tier-name { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--white); font-weight: 400; margin-bottom: 6px; }
-    .tier-for { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 28px; }
+/* PAGE HERO */
 
-    .tier-price-block { margin-bottom: 28px; }
-    .price-label { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
-    .price-val { font-family: 'DM Serif Display', serif; font-size: 42px; color: var(--white); line-height: 1; }
-    .price-val em { font-style: italic; color: var(--accent); font-size: 32px; }
-    .price-val .currency { font-size: 24px; color: var(--text-muted); font-style: normal; }
-    .price-note { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+.pricing-hero{
+padding:160px 48px 100px;
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+align-items:end;
+}
 
-    .tier-divider { height: 1px; background: var(--border); margin: 24px 0; }
+.pricing-hero h1{
+font-size:clamp(48px,7vw,92px);
+font-family:var(--font-display);
+line-height:1;
+margin-bottom:26px;
+}
 
-    .tier-features { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; flex: 1; }
-    .tier-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
-    .feature-check { color: var(--accent); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
-    .feature-dash  { color: var(--text-dim); font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+.pricing-hero p{
+font-size:15px;
+line-height:1.8;
+color:var(--dim);
+max-width:440px;
+}
 
-    .tier-suited {
-      padding: 12px 14px; background: rgba(200,169,110,0.04);
-      border: 1px solid rgba(200,169,110,0.1); margin-bottom: 24px;
-    }
-    .suited-label { font-family: 'Space Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
-    .suited-text { font-size: 12px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+.hero-note{
+margin-top:24px;
+padding:16px 18px;
+border:1px solid var(--border);
+background:rgba(255,255,255,0.03);
+font-size:13px;
+color:var(--dim);
+}
 
-    .tier-cta {
-      display: block; text-align: center; text-decoration: none;
-      padding: 14px 20px; font-size: 13px; font-weight: 500;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      border-radius: var(--radius); transition: all 0.2s; margin-top: auto;
-    }
-    .cta-primary { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
-    .cta-primary:hover { background: #d9bb82; }
-    .cta-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border-light); }
-    .cta-ghost:hover { color: var(--white); border-color: var(--text-muted); }
+/* HERO STATS */
 
-    /* ── COMPARISON TABLE ── */
-    .comp-table {
-      width: 100%; border-collapse: collapse;
-      border: 1px solid var(--border);
-    }
-    .comp-table th, .comp-table td {
-      padding: 16px 20px; text-align: left;
-      border-bottom: 1px solid var(--border);
-      font-size: 13.5px;
-    }
-    .comp-table th {
-      background: var(--bg-card); font-family: 'Space Mono', monospace;
-      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--text-dim); font-weight: 400;
-    }
-    .comp-table th.highlight { color: var(--accent); }
-    .comp-table td { color: var(--text-muted); background: var(--bg); }
-    .comp-table td.row-label { color: var(--text); font-weight: 500; font-size: 13px; }
-    .comp-table td.highlight { color: var(--white); background: rgba(200,169,110,0.03); }
-    .comp-table tr:last-child td { border-bottom: none; }
-    .comp-table tr:hover td { background: var(--bg-hover); }
-    .comp-table tr:hover td.highlight { background: rgba(200,169,110,0.06); }
-    .check-y { color: var(--accent); }
-    .check-n { color: var(--text-dim); }
+.hero-right{
+display:flex;
+flex-direction:column;
+gap:24px;
+}
 
-    /* ── FUNNEL ── */
-    .funnel-section { background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .funnel-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.hero-stat-num{
+font-size:36px;
+font-family:var(--font-display);
+}
 
-    .funnel-steps { display: flex; flex-direction: column; gap: 0; }
-    .funnel-step {
-      display: flex; gap: 20px; position: relative;
-    }
-    .funnel-step:not(:last-child) .step-line {
-      position: absolute; left: 19px; top: 44px; bottom: -4px;
-      width: 1px; background: var(--border-light);
-    }
-    .step-node {
-      display: flex; flex-direction: column; align-items: center;
-      flex-shrink: 0;
-    }
-    .step-circle {
-      width: 40px; height: 40px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Space Mono', monospace; font-size: 11px;
-      font-weight: 700; border: 1px solid var(--border-light);
-      background: var(--tag-bg); color: var(--text-dim);
-      flex-shrink: 0; position: relative; z-index: 1;
-    }
-    .step-circle.c-gray   { background: var(--tag-bg); color: var(--text-muted); border-color: var(--border-light); }
-    .step-circle.c-blue   { background: rgba(126,184,247,0.1); color: var(--blue); border-color: rgba(126,184,247,0.3); }
-    .step-circle.c-teal   { background: rgba(94,234,212,0.1); color: var(--teal); border-color: rgba(94,234,212,0.3); }
-    .step-circle.c-purple { background: rgba(192,132,252,0.1); color: var(--purple); border-color: rgba(192,132,252,0.3); }
-    .step-circle.c-green  { background: rgba(168,230,163,0.15); color: var(--green); border-color: rgba(168,230,163,0.4); }
+.hero-stat-label{
+font-size:12px;
+color:var(--dim);
+}
 
-    .step-body { padding: 8px 0 28px; flex: 1; }
-    .step-title { font-size: 14px; color: var(--white); font-weight: 500; line-height: 1.3; }
-    .step-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; line-height: 1.5; }
 
-    /* fork label */
-    .fork-row {
-      display: flex; gap: 10px; margin: -8px 0 20px 60px;
-    }
-    .fork-tag {
-      flex: 1; padding: 10px 14px; font-size: 12px;
-      border: 1px solid var(--border); background: var(--tag-bg);
-      display: flex; flex-direction: column; gap: 3px;
-    }
-    .fork-tag-title { font-size: 11px; font-weight: 600; }
-    .fork-tag-sub { font-size: 11px; color: var(--text-dim); }
-    .fork-tag.blue { border-color: rgba(126,184,247,0.25); }
-    .fork-tag.blue .fork-tag-title { color: var(--blue); }
-    .fork-tag.teal { border-color: rgba(94,234,212,0.25); }
-    .fork-tag.teal .fork-tag-title { color: var(--teal); }
+/* CURRENCY TOGGLE */
 
-    .funnel-right h3 { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--white); font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
-    .funnel-right h3 em { font-style: italic; color: var(--accent); }
-    .funnel-right p { color: var(--text-muted); font-size: 14px; line-height: 1.85; margin-bottom: 16px; }
+.toggle-wrap{
+display:flex;
+justify-content:center;
+margin-bottom:60px;
+}
 
-    .funnel-cta-links { display: flex; flex-direction: column; gap: 10px; margin-top: 32px; }
-    .funnel-cta-link {
-      display: flex; align-items: center; gap: 12px;
-      padding: 14px 18px; border: 1px solid var(--border);
-      background: var(--tag-bg); text-decoration: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .funnel-cta-link:hover { border-color: var(--accent); background: var(--bg-hover); }
-    .fcl-icon { font-size: 18px; flex-shrink: 0; }
-    .fcl-label { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
-    .fcl-label strong { color: var(--white); display: block; font-size: 13px; margin-bottom: 1px; }
-    .fcl-arrow { margin-left: auto; color: var(--text-dim); font-size: 14px; transition: color 0.2s, transform 0.2s; }
-    .funnel-cta-link:hover .fcl-arrow { color: var(--accent); transform: translateX(3px); }
+.toggle-btn{
+border:1px solid var(--border);
+background:transparent;
+color:var(--dim);
+padding:12px 26px;
+font-size:13px;
+cursor:pointer;
+}
 
-    /* ── POLICIES ── */
-    .policies-grid {
-      display: grid; grid-template-columns: repeat(3,1fr);
-      gap: 1px; background: var(--border); border: 1px solid var(--border);
-    }
-    .policy-card {
-      background: var(--bg-card); padding: 32px 28px;
-      transition: background 0.2s;
-    }
-    .policy-card:hover { background: var(--bg-hover); }
-    .policy-icon { font-size: 22px; margin-bottom: 14px; }
-    .policy-title { font-size: 14px; color: var(--white); font-weight: 500; margin-bottom: 8px; }
-    .policy-desc { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
-    .policy-desc strong { color: var(--accent); }
+.toggle-btn.active{
+background:white;
+color:black;
+}
 
-    /* ── CTA BANNER ── */
-    .cta-banner {
-      background: var(--bg-card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    }
-    .cta-banner-inner {
-      max-width: 1200px; margin: 0 auto; padding: 80px 48px;
-      display: flex; align-items: center; justify-content: space-between; gap: 40px;
-    }
-    .cta-banner-text h2 { font-family: 'DM Serif Display', serif; font-size: clamp(28px,3.5vw,42px); color: var(--white); font-weight: 400; line-height: 1.15; }
-    .cta-banner-text h2 em { font-style: italic; color: var(--accent); }
-    .cta-banner-text p { color: var(--text-muted); font-size: 14px; margin-top: 10px; max-width: 440px; }
-    .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
-    .btn { text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 14px 28px; border-radius: var(--radius); transition: all 0.2s; display: inline-block; }
-    .btn-primary { background: var(--accent); color: var(--bg); border: 1px solid var(--accent); }
-    .btn-primary:hover { background: #d9bb82; }
-    .btn-ghost { color: var(--text-muted); border: 1px solid var(--border-light); background: transparent; }
-    .btn-ghost:hover { color: var(--white); border-color: var(--text-muted); }
 
-    /* ── FOOTER ── */
-    footer { padding: 60px 48px 32px; border-top: 1px solid var(--border); }
-    .footer-inner { max-width: 1200px; margin: 0 auto; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
-    .footer-brand-name { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--white); margin-bottom: 12px; text-decoration: none; display: block; }
-    .footer-tagline { font-size: 13px; color: var(--text-muted); line-height: 1.7; max-width: 280px; }
-    .footer-col h5 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; font-weight: 600; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col a { text-decoration: none; color: var(--text-muted); font-size: 13px; transition: color 0.2s; }
-    .footer-col a:hover { color: var(--white); }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
-    .footer-copy, .footer-location { font-size: 12px; color: var(--text-dim); }
+/* PRICING GRID */
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .nav-toggle { display: block; }
-      section { padding: 72px 24px; }
-      .hero { padding: 120px 24px 72px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-      .tiers-grid { grid-template-columns: 1fr; }
-      .tier-card.highlighted { margin: 0; border: 1px solid rgba(200,169,110,0.3); }
-      .funnel-inner { grid-template-columns: 1fr; gap: 48px; }
-      .policies-grid { grid-template-columns: 1fr 1fr; }
-      .cta-banner-inner { flex-direction: column; text-align: center; align-items: center; }
-      .cta-actions { flex-direction: column; width: 100%; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    }
-    @media (max-width: 640px) {
-      .policies-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .fork-row { flex-direction: column; }
-    }
-  </style>
+.tiers-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:1px;
+background:var(--border);
+}
+
+.tier-card{
+background:var(--black);
+padding:46px 38px;
+display:flex;
+flex-direction:column;
+gap:18px;
+transition:.35s;
+}
+
+.tier-card:hover{
+transform:translateY(-6px);
+background:#111;
+}
+
+.tier-card.highlighted{
+border:1px solid rgba(255,255,255,0.2);
+position:relative;
+}
+
+.popular-badge{
+position:absolute;
+top:20px;
+right:20px;
+font-size:10px;
+letter-spacing:.1em;
+background:white;
+color:black;
+padding:4px 10px;
+}
+
+/* TEXT */
+
+.tier-num{
+font-family:var(--font-mono);
+font-size:11px;
+color:var(--dim);
+}
+
+.tier-name{
+font-size:30px;
+font-family:var(--font-display);
+}
+
+.tier-for{
+font-size:13px;
+color:var(--dim);
+margin-bottom:12px;
+}
+
+.price-val{
+font-size:46px;
+font-family:var(--font-display);
+}
+
+.tier-divider{
+height:1px;
+background:var(--border);
+margin:14px 0;
+}
+
+/* FEATURES */
+
+.tier-features{
+list-style:none;
+display:flex;
+flex-direction:column;
+gap:8px;
+font-size:13px;
+color:var(--dim);
+}
+
+.tier-features span{
+color:white;
+}
+
+/* CTA */
+
+.tier-cta{
+margin-top:20px;
+text-decoration:none;
+border:1px solid var(--border);
+padding:12px 16px;
+font-size:13px;
+display:inline-block;
+}
+
+.tier-cta:hover{
+border-color:white;
+color:white;
+}
+
+
+/* FUNNEL */
+
+.funnel-section{
+padding:120px 48px;
+border-top:1px solid var(--border);
+}
+
+.funnel-inner{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:80px;
+}
+
+.step{
+margin-bottom:24px;
+}
+
+.step-title{
+font-size:14px;
+color:white;
+}
+
+.step-sub{
+font-size:12px;
+color:var(--dim);
+}
+
+
+/* POLICIES */
+
+.policies-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:1px;
+background:var(--border);
+margin-top:40px;
+}
+
+.policy-card{
+background:var(--black);
+padding:30px;
+}
+
+.policy-title{
+font-size:14px;
+color:white;
+margin-bottom:10px;
+}
+
+.policy-desc{
+font-size:13px;
+color:var(--dim);
+}
+
+
+/* CTA */
+
+.cta-banner{
+padding:120px 48px;
+text-align:center;
+border-top:1px solid var(--border);
+}
+
+.cta-banner h2{
+font-family:var(--font-display);
+font-size:clamp(40px,6vw,80px);
+line-height:1;
+margin-bottom:20px;
+}
+
+.cta-banner em{
+color:transparent;
+-webkit-text-stroke:1px white;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.pricing-hero{
+grid-template-columns:1fr;
+gap:40px;
+padding:120px 24px 80px;
+}
+
+.tiers-grid{
+grid-template-columns:1fr;
+}
+
+.funnel-inner{
+grid-template-columns:1fr;
+}
+
+.policies-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
 </head>
+
+
 <body>
 
-  <!-- ANIMATION LAYER -->
-  <div class="aqr-cursor"></div>
-  <div class="aqr-cursor-ring"></div>
-  <div id="aqr-scroll-bar"></div>
-  <div class="aqr-noise"></div>
-  <canvas id="aqr-particles"></canvas>
-  <nav>
-    <a href="index.html" class="nav-logo">AQR</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="work.html">Work</a></li>
-      <li><a href="mission.html">Mission</a></li>
-      <li><a href="pricing.html" class="active">Pricing</a></li>
-      <li><a href="edge.html">Our Edge</a></li>
-    </ul>
-    <button class="nav-toggle" onclick="document.querySelector('.nav-mobile').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-  <div class="nav-mobile">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="services.html">Services</a>
-    <a href="work.html">Work</a>
-    <a href="mission.html">Mission</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="edge.html">Our Edge</a>
-  </div>
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-inner">
-      <div>
-        <p class="section-label reveal-p">Think Like a Consultant. Execute Like an Agency.</p>
-        <h1 class="reveal-p">Three Tiers.<br><em>One Standard.</em></h1>
-        <p class="hero-sub reveal-p reveal-p-d1">Choose the engagement level that matches your business stage. All tiers deliver the same consulting-led thinking — the scope and depth scales with your needs.</p>
-        <div class="hero-note reveal-p reveal-p-d2">
-          <span class="hero-note-icon">✦</span>
-          <p class="hero-note-text"><strong>Exact pricing shared on inquiry.</strong> Ranges shown here are starting points for self-qualification — final pricing is scoped after a free discovery conversation based on your specific requirements.</p>
-        </div>
-        <div style="margin-top: 20px;">
-          <button onclick="openPdfModal()" class="btn btn-primary" style="font-size:13px; padding:14px 28px; cursor:pointer; border-radius:4px; font-family:'DM Sans',sans-serif;">Download Pricing PDFs ↓</button>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="hero-stat reveal-p-right reveal-p-d1">
-          <div class="hero-stat-num"><em><span data-count="3">0</span></em></div>
-          <div class="hero-stat-label">Engagement Tiers</div>
-        </div>
-        <div class="hero-stat reveal-p-right reveal-p-d2">
-          <div class="hero-stat-num"><span data-count="2">0</span><em>×</em></div>
-          <div class="hero-stat-label">Currency Markets — INR & USD</div>
-        </div>
-        <div class="hero-stat reveal-p-right reveal-p-d3">
-          <div class="hero-stat-num"><em>Free</em></div>
-          <div class="hero-stat-label">Discovery Call — Always</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- MARQUEE -->
-  <div class="aqr-marquee-wrap">
-    <div class="aqr-marquee-track">
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Starter — From ₹799 / $20</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Growth — From ₹4,999 / $90</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Partner — From ₹9,999 / $180</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Free Discovery Call — Always</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Think Like a Consultant</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Execute Like an Agency</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>INR &amp; USD Markets</div>
-      <div class="aqr-marquee-item"><div class="aqr-marquee-dot"></div>Exact Pricing on Inquiry</div>
-    </div>
-  </div>
-
-  <!-- PRICING TIERS -->
-  <section>
-    <div class="container">
-      <div style="text-align:center; margin-bottom:16px;">
-        <p class="section-label" style="display:inline-block;">Select Your Currency</p>
-      </div>
-
-      <!-- Currency Toggle -->
-      <div class="toggle-wrap">
-        <button class="toggle-btn inr active" onclick="setCurrency('inr')">₹ India (INR)</button>
-        <button class="toggle-btn usd" onclick="setCurrency('usd')">$ International (USD)</button>
-      </div>
-
-      <!-- Tier Cards -->
-      <div class="tiers-grid">
-
-        <!-- STARTER -->
-        <div class="tier-card reveal-p reveal-p-d1">
-          <div class="tier-num">01 — STARTER</div>
-          <div class="tier-name">Starter</div>
-          <div class="tier-for">For solopreneurs & early-stage projects</div>
-
-          <div class="tier-price-block">
-            <div class="price-label">Starting from</div>
-            <div class="price-val inr-price">
-              <span class="currency">₹</span>799
-            </div>
-            <div class="price-val usd-price" style="display:none;">
-              <span class="currency">$</span>20
-            </div>
-            <div class="price-note">Full payment upfront · No surprises</div>
-          </div>
-
-          <div class="tier-divider"></div>
-
-          <ul class="tier-features">
-            <li class="tier-feature"><span class="feature-check">✓</span> Fixed-price, fast-turnaround deliverables</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Direct execution by Arsalan — Solo Mode</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Ideal for single-service requirements</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Perfect for building trust before larger projects</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> 1 revision round included</li>
-            <li class="tier-feature"><span class="feature-dash">—</span> <span style="color:var(--text-dim)">Strategy layer not included</span></li>
-          </ul>
-
-          <div class="tier-suited">
-            <div class="suited-label">Best Suited For</div>
-            <div class="suited-text inr-suited">Individuals, students, early founders, local businesses</div>
-            <div class="suited-text usd-suited" style="display:none;">Freelancers, consultants, early founders, international solopreneurs</div>
-          </div>
-
-          <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'm%20interested%20in%20the%20Starter%20tier%20at%20AQR%20Services." target="_blank" class="tier-cta cta-ghost">Start with Starter →</a>
-        </div>
-
-        <!-- GROWTH — Highlighted -->
-        <div class="tier-card highlighted reveal-p reveal-p-d2">
-          <span class="popular-badge">Most Popular</span>
-          <div class="tier-num">02 — GROWTH</div>
-          <div class="tier-name">Growth</div>
-          <div class="tier-for">For startups & businesses needing bundled solutions</div>
-
-          <div class="tier-price-block">
-            <div class="price-label">Starting from</div>
-            <div class="price-val inr-price">
-              <span class="currency">₹</span>4,999
-            </div>
-            <div class="price-val usd-price" style="display:none;">
-              <span class="currency">$</span>90
-            </div>
-            <div class="price-note">50% advance · 50% on delivery</div>
-          </div>
-
-          <div class="tier-divider"></div>
-
-          <ul class="tier-features">
-            <li class="tier-feature"><span class="feature-check">✓</span> Bundled multi-service packages — complete solutions</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Strategy-led by AQR, executed via hybrid model</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Higher perceived value with clear deliverables</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Quality review before every delivery</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> 2 revision rounds included</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Strategy layer included</li>
-          </ul>
-
-          <div class="tier-suited">
-            <div class="suited-label">Best Suited For</div>
-            <div class="suited-text inr-suited">Growing startups, SMEs, D2C brands, brand launches</div>
-            <div class="suited-text usd-suited" style="display:none;">International startups, e-commerce brands, agency owners, global SMEs</div>
-          </div>
-
-          <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'm%20interested%20in%20the%20Growth%20tier%20at%20AQR%20Services." target="_blank" class="tier-cta cta-primary">Start with Growth →</a>
-        </div>
-
-        <!-- PARTNER -->
-        <div class="tier-card reveal-p reveal-p-d3">
-          <div class="tier-num">03 — PARTNER</div>
-          <div class="tier-name">Partner</div>
-          <div class="tier-for">For businesses wanting premium, full-scope execution</div>
-
-          <div class="tier-price-block">
-            <div class="price-label">Starting from</div>
-            <div class="price-val inr-price">
-              <span class="currency">₹</span>9,999
-            </div>
-            <div class="price-val usd-price" style="display:none;">
-              <span class="currency">$</span>180
-            </div>
-            <div class="price-note">50% advance · 50% on delivery</div>
-          </div>
-
-          <div class="tier-divider"></div>
-
-          <ul class="tier-features">
-            <li class="tier-feature"><span class="feature-check">✓</span> Full strategic execution across multiple deliverables</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Deep-dive strategy layer on every project</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Priority turnaround on all requests</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Quality review at every stage before delivery</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Unlimited revisions within scope</li>
-            <li class="tier-feature"><span class="feature-check">✓</span> Monthly retainer model available</li>
-          </ul>
-
-          <div class="tier-suited">
-            <div class="suited-label">Best Suited For</div>
-            <div class="suited-text inr-suited">Scaling businesses, funded startups, serious brand builders</div>
-            <div class="suited-text usd-suited" style="display:none;">Scaling businesses, funded startups, serious brand builders</div>
-          </div>
-
-          <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'm%20interested%20in%20the%20Partner%20tier%20at%20AQR%20Services." target="_blank" class="tier-cta cta-ghost">Start with Partner →</a>
-        </div>
-
-      </div>
-
-      <!-- Comparison Table -->
-      <div style="margin-top: 1px;">
-        <table class="comp-table">
-          <thead>
-            <tr>
-              <th style="width:28%;">Feature</th>
-              <th>Starter</th>
-              <th class="highlight">Growth</th>
-              <th>Partner</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="row-label">Starting Price (INR)</td>
-              <td class="inr-show">From ₹799</td>
-              <td class="highlight inr-show">From ₹4,999</td>
-              <td class="inr-show">From ₹9,999</td>
-              <td class="usd-show" style="display:none;">From $20</td>
-              <td class="highlight usd-show" style="display:none;">From $90</td>
-              <td class="usd-show" style="display:none;">From $180</td>
-            </tr>
-            <tr>
-              <td class="row-label">Project Type</td>
-              <td>Single deliverable</td>
-              <td class="highlight">Multi-service bundle</td>
-              <td>Monthly retainer</td>
-            </tr>
-            <tr>
-              <td class="row-label">Execution Mode</td>
-              <td>Direct by Arsalan</td>
-              <td class="highlight">AQR hybrid model</td>
-              <td>Full-service + strategy</td>
-            </tr>
-            <tr>
-              <td class="row-label">Revisions</td>
-              <td>1 round</td>
-              <td class="highlight">2 rounds</td>
-              <td>Unlimited in scope</td>
-            </tr>
-            <tr>
-              <td class="row-label">Turnaround</td>
-              <td>Fast &amp; fixed</td>
-              <td class="highlight">Standard timeline</td>
-              <td>Priority lane</td>
-            </tr>
-            <tr>
-              <td class="row-label">Strategy Layer</td>
-              <td><span class="check-n">—</span></td>
-              <td class="highlight"><span class="check-y">✓ Included</span></td>
-              <td><span class="check-y">✓ Deep-dive</span></td>
-            </tr>
-            <tr>
-              <td class="row-label">Payment Terms</td>
-              <td>Full upfront</td>
-              <td class="highlight">50% + 50%</td>
-              <td>50% + 50%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ACQUISITION FUNNEL -->
-  <section class="funnel-section">
-    <div class="container">
-      <div class="funnel-inner">
-
-        <!-- Left: Steps -->
-        <div>
-          <p class="section-label reveal-p">How It Works</p>
-          <h2 class="section-title reveal-p" style="margin-bottom:40px;">From <em>First Contact</em><br>to Work Begun.</h2>
-
-          <div class="funnel-steps">
-
-            <!-- Step 1 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-gray">01</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Client lands on website &amp; views services</div>
-                <div class="step-sub">Browses core offerings and pricing ranges for self-qualification</div>
-              </div>
-            </div>
-
-            <!-- Fork -->
-            <div class="fork-row">
-              <div class="fork-tag blue">
-                <span class="fork-tag-title">🌐 International</span>
-                <span class="fork-tag-sub">USD tier table</span>
-              </div>
-              <div class="fork-tag teal">
-                <span class="fork-tag-title">🇮🇳 India</span>
-                <span class="fork-tag-sub">INR tier table</span>
-              </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-gray">02</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Clicks "Request a Custom Quote"</div>
-                <div class="step-sub">Triggered by any CTA on the site</div>
-              </div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-purple">03</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Inquiry — rough brief shared</div>
-                <div class="step-sub">Via Email or WhatsApp — no formal form required</div>
-              </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-purple">04</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Service Menu PDF sent</div>
-                <div class="step-sub">Full offering, all verticals and scope — so you know exactly what AQR delivers</div>
-              </div>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-purple">05</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Rate Card sent</div>
-                <div class="step-sub">INR or USD based on client geography — client self-qualifies on tier</div>
-              </div>
-            </div>
-
-            <!-- Step 6 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-purple">06</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Discovery Form</div>
-                <div class="step-sub">Tailored questions per service vertical — no one-size-fits-all brief</div>
-              </div>
-            </div>
-
-            <!-- Step 7 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-purple">07</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Review &amp; Draft Proposal</div>
-                <div class="step-sub">Scope, timeline, and pricing confirmed — no ambiguity</div>
-              </div>
-            </div>
-
-            <!-- Step 8 -->
-            <div class="funnel-step reveal-p">
-              <div class="step-line"></div>
-              <div class="step-node">
-                <div class="step-circle c-purple">08</div>
-              </div>
-              <div class="step-body">
-                <div class="step-title">Proposal Sent</div>
-                <div class="step-sub">Agreement + 50% advance on approval (Starter: full upfront)</div>
-              </div>
-            </div>
-
-            <!-- Step 9 — Final -->
-            <div class="funnel-step reveal-p">
-              <div class="step-node">
-                <div class="step-circle c-green">09</div>
-              </div>
-              <div class="step-body" style="padding-bottom:0;">
-                <div class="step-title" style="color:var(--green);">Work Begins — Delivery in Motion</div>
-                <div class="step-sub">Full execution starts. You get a partner, not a vendor.</div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Right: Context -->
-        <div class="funnel-right">
-          <h3>No guesswork.<br><em>No cold surprises.</em></h3>
-          <p>The AQR client acquisition process is designed around one principle: by the time you pay, you know exactly what you're getting — and why it's priced the way it is.</p>
-          <p>Pricing ranges are shown on the website for self-qualification. Exact pricing is confirmed only after a free discovery conversation where scope, timeline, and objectives are fully understood.</p>
-          <p>This isn't gatekeeping — it's how good consulting works. A pitch deck for a pre-seed startup and one for a Series A company are not the same project, even if they look the same on a menu.</p>
-          <p style="color:var(--text);">Every inquiry gets a personal response from Arsalan. No templates, no auto-replies, no junior hand-offs.</p>
-
-          <div class="funnel-cta-links">
-            <a href="mailto:aqrservices.in@gmail.com" class="funnel-cta-link">
-              <span class="fcl-icon">✉️</span>
-              <span class="fcl-label">
-                <strong>Email a Brief</strong>
-                aqrservices.in@gmail.com
-              </span>
-              <span class="fcl-arrow">→</span>
-            </a>
-            <a href="https://wa.me/916006464058" target="_blank" class="funnel-cta-link">
-              <span class="fcl-icon">💬</span>
-              <span class="fcl-label">
-                <strong>WhatsApp — Fastest Response</strong>
-                wa.me/916006464058
-              </span>
-              <span class="fcl-arrow">→</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- PRICING POLICIES -->
-  <section>
-    <div class="container">
-      <div style="margin-bottom:48px;">
-        <p class="section-label reveal-p">Policies & Terms</p>
-        <h2 class="section-title reveal-p">Pricing <em>Policies</em></h2>
-        <p class="section-desc reveal-p reveal-p-d1">Clear, upfront terms — no hidden fees, no post-delivery surprises.</p>
-      </div>
-
-      <div class="policies-grid">
-        <div class="policy-card reveal-p reveal-p-d1">
-          <div class="policy-icon">⚡</div>
-          <div class="policy-title">Rush Delivery Fee</div>
-          <p class="policy-desc"><strong>+30–50%</strong> on base price for turnarounds under 48 hours. Rush requests are accepted subject to current capacity — always confirm availability first.</p>
-        </div>
-        <div class="policy-card reveal-p reveal-p-d2">
-          <div class="policy-icon">🔄</div>
-          <div class="policy-title">Revision Policy</div>
-          <p class="policy-desc"><strong>Starter:</strong> 1 revision round &nbsp;·&nbsp; <strong>Growth:</strong> 2 rounds &nbsp;·&nbsp; <strong>Partner:</strong> Unlimited within agreed scope. Scope changes beyond original brief are quoted separately.</p>
-        </div>
-        <div class="policy-card reveal-p reveal-p-d3">
-          <div class="policy-icon">🎯</div>
-          <div class="policy-title">Custom Projects</div>
-          <p class="policy-desc">Quoted after a <strong>free discovery call</strong> — no standard package required. Complex or multi-vertical engagements are always scoped individually.</p>
-        </div>
-        <div class="policy-card reveal-p reveal-p-d4">
-          <div class="policy-icon">📊</div>
-          <div class="policy-title">Margin Principle</div>
-          <p class="policy-desc">All projects priced to maintain a <strong>40–60% agency margin</strong> after execution costs — ensuring sustainable quality delivery on every engagement.</p>
-        </div>
-        <div class="policy-card reveal-p reveal-p-d5">
-          <div class="policy-icon">💳</div>
-          <div class="policy-title">Payment Terms</div>
-          <p class="policy-desc"><strong>Starter:</strong> Full upfront &nbsp;·&nbsp; <strong>Growth & Partner:</strong> 50% advance on agreement, 50% on delivery. International payments via Wise or PayPal (USD). GST applicable per Indian norms.</p>
-        </div>
-        <div class="policy-card reveal-p reveal-p-d6">
-          <div class="policy-icon">🔒</div>
-          <div class="policy-title">Confidentiality</div>
-          <p class="policy-desc">All client information, briefs, and project details are treated with <strong>complete confidentiality</strong>. NDA available on request for sensitive engagements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA BANNER -->
-  <div class="cta-banner">
-    <div class="cta-banner-inner">
-      <div class="cta-banner-text">
-        <h2>Tell me what you're trying<br>to <em>achieve.</em></h2>
-        <p>I'll personally review your needs and recommend the best solution — no templates, no auto-replies. Just a direct conversation about what your business needs.</p>
-        <p style="margin-top:12px; font-size:13px; color:var(--text-dim);">— Arsalan, Founder, AQR Services</p>
-      </div>
-      <div class="cta-actions">
-        <button onclick="openPdfModal()" class="btn btn-primary">Download Pricing PDFs ↓</button>
-        <a href="https://wa.me/916006464058?text=Hi%20Arsalan%2C%20I'd%20like%20to%20discuss%20a%20project%20with%20AQR%20Services." target="_blank" class="btn btn-ghost">💬 WhatsApp</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div>
-          <a href="index.html" class="footer-brand-name">AQR Services</a>
-          <p class="footer-tagline">Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
-        </div>
-        <div class="footer-col">
-          <h5>Navigation</h5>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="work.html">Work</a></li>
-            <li><a href="pricing.html">Pricing</a></li>
-            <li><a href="mission.html">Mission</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Services</h5>
-          <ul>
-            <li><a href="services.html">Presentations</a></li>
-            <li><a href="services.html">Dashboards</a></li>
-            <li><a href="services.html">Brand Design</a></li>
-            <li><a href="services.html">Consulting</a></li>
-            <li><a href="services.html">Research</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Connect</h5>
-          <ul>
-            <li><a href="#">LinkedIn</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="mailto:aqrservices.in@gmail.com">Email</a></li>
-            <li><a href="https://wa.me/916006464058" target="_blank">WhatsApp</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2025 AQR Services. All rights reserved.</span>
-        <span class="footer-location">Srinagar, Jammu & Kashmir, India</span>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ══ WHATSAPP FLOAT BUTTON ══ -->
-  <a href="https://wa.me/916006464058" target="_blank" class="wa-float" aria-label="Chat on WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="28" height="28">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-    </svg>
-    <span class="wa-label">WhatsApp</span>
-  </a>
-
-  <!-- ══ PDF DOWNLOAD MODAL ══ -->
-  <div class="pdf-modal-overlay" id="pdfModal" onclick="closePdfModal(event)">
-    <div class="pdf-modal-box">
-      <div class="pdf-modal-header">
-        <div>
-          <p class="pdf-modal-eyebrow">AQR Services — Official Documents</p>
-          <h3 class="pdf-modal-title">Download Pricing Materials</h3>
-        </div>
-        <button class="pdf-modal-close" onclick="document.getElementById('pdfModal').classList.remove('open')">✕</button>
-      </div>
-      <p class="pdf-modal-desc">Choose the document that matches your needs. Both are available for download instantly.</p>
-      <div class="pdf-options">
-        <a href="assets/aqr-service-menu.pdf" download class="pdf-option">
-          <div class="pdf-opt-icon">📋</div>
-          <div class="pdf-opt-body">
-            <div class="pdf-opt-title">Service Menu</div>
-            <div class="pdf-opt-sub">Full offering, all verticals, scope &amp; deliverables — understand everything AQR delivers before you engage.</div>
-            <div class="pdf-opt-tag">Best for: New clients exploring services</div>
-          </div>
-          <div class="pdf-opt-arrow">↓</div>
-        </a>
-        <a href="assets/aqr-rate-card.pdf" download class="pdf-option">
-          <div class="pdf-opt-icon">💰</div>
-          <div class="pdf-opt-body">
-            <div class="pdf-opt-title">Rate Card (INR + USD)</div>
-            <div class="pdf-opt-sub">Detailed pricing for every service across all three tiers — Starter, Growth, and Partner — in both currencies.</div>
-            <div class="pdf-opt-tag">Best for: Clients ready to budget &amp; compare</div>
-          </div>
-          <div class="pdf-opt-arrow">↓</div>
-        </a>
-      </div>
-      <div class="pdf-modal-footer">
-        <p>Need something specific? Reach out directly —</p>
-        <a href="https://wa.me/916006464058" target="_blank">WhatsApp: +91 6006 464058 →</a>
-      </div>
-    </div>
-  </div>
-
-  <style>
-    /* WhatsApp Float */
-    .wa-float {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      z-index: 9000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #25D366;
-      color: white;
-      padding: 14px 20px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      box-shadow: 0 4px 24px rgba(37,211,102,0.4), 0 2px 8px rgba(0,0,0,0.3);
-      transition: all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
-      font-family: 'DM Sans', sans-serif;
-    }
-    .wa-float:hover {
-      background: #20b858;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(37,211,102,0.5), 0 4px 16px rgba(0,0,0,0.3);
-    }
-    .wa-label { white-space: nowrap; }
-
-    /* PDF Modal */
-    .pdf-modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(8px);
-      z-index: 10000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    .pdf-modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .pdf-modal-box {
-      background: #111114;
-      border: 1px solid #2a2a32;
-      max-width: 600px;
-      width: 100%;
-      padding: 40px;
-      position: relative;
-      transform: translateY(20px);
-      transition: transform 0.3s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-    .pdf-modal-overlay.open .pdf-modal-box { transform: translateY(0); }
-    .pdf-modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-    .pdf-modal-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #c8a96e;
-      margin-bottom: 8px;
-    }
-    .pdf-modal-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 24px;
-      color: #f5f3ef;
-      font-weight: 400;
-    }
-    .pdf-modal-close {
-      background: none;
-      border: 1px solid #1e1e24;
-      color: #7a7875;
-      width: 32px;
-      height: 32px;
-      cursor: pointer;
-      font-size: 12px;
-      flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .pdf-modal-close:hover { border-color: #7a7875; color: #f5f3ef; }
-    .pdf-modal-desc {
-      font-size: 13px;
-      color: #7a7875;
-      margin-bottom: 28px;
-      line-height: 1.7;
-    }
-    .pdf-options { display: flex; flex-direction: column; gap: 12px; }
-    .pdf-option {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 20px;
-      border: 1px solid #1e1e24;
-      background: #0a0a0b;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .pdf-option:hover {
-      border-color: #c8a96e;
-      background: #16161a;
-    }
-    .pdf-opt-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
-    .pdf-opt-body { flex: 1; }
-    .pdf-opt-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #f5f3ef;
-      margin-bottom: 6px;
-    }
-    .pdf-opt-sub {
-      font-size: 12px;
-      color: #7a7875;
-      line-height: 1.6;
-      margin-bottom: 8px;
-    }
-    .pdf-opt-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      color: #c8a96e;
-    }
-    .pdf-opt-arrow {
-      font-size: 18px;
-      color: #c8a96e;
-      flex-shrink: 0;
-      transition: transform 0.2s;
-    }
-    .pdf-option:hover .pdf-opt-arrow { transform: translateY(3px); }
-    .pdf-modal-footer {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid #1e1e24;
-      font-size: 12px;
-      color: #4a4845;
-    }
-    .pdf-modal-footer a {
-      color: #c8a96e;
-      text-decoration: none;
-      display: block;
-      margin-top: 4px;
-      font-size: 13px;
-    }
-    .pdf-modal-footer a:hover { text-decoration: underline; }
-
-    @media (max-width: 640px) {
-      .wa-float .wa-label { display: none; }
-      .wa-float { padding: 14px; border-radius: 50%; }
-      .pdf-modal-box { padding: 28px 20px; }
-    }
-  </style>
-
-  <script>
-    function openPdfModal() {
-      document.getElementById('pdfModal').classList.add('open');
-    }
-    function closePdfModal(e) {
-      if (e.target === document.getElementById('pdfModal')) {
-        document.getElementById('pdfModal').classList.remove('open');
-      }
-    }
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') document.getElementById('pdfModal').classList.remove('open');
-    });
-  </script>
-
-  <script>
-    function setCurrency(cur) {
-      const isInr = cur === 'inr';
-      document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.toggle-btn.' + cur).classList.add('active');
-
-      document.querySelectorAll('.inr-price').forEach(el => el.style.display = isInr ? '' : 'none');
-      document.querySelectorAll('.usd-price').forEach(el => el.style.display = isInr ? 'none' : '');
-      document.querySelectorAll('.inr-suited').forEach(el => el.style.display = isInr ? '' : 'none');
-      document.querySelectorAll('.usd-suited').forEach(el => el.style.display = isInr ? 'none' : '');
-      document.querySelectorAll('.inr-show').forEach(el => el.style.display = isInr ? '' : 'none');
-      document.querySelectorAll('.usd-show').forEach(el => el.style.display = isInr ? 'none' : '');
-    }
-  </script>
-
-  <!-- ══ ANIMATION SYSTEM ══ -->
-  <style>
-    /* Custom cursor */
-    .aqr-cursor {
-      width: 8px; height: 8px;
-      background: #c8a96e;
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 99999;
-      transform: translate(-50%, -50%);
-      transition: width .2s, height .2s;
-      box-shadow: 0 0 10px rgba(200,169,110,0.5);
-    }
-    .aqr-cursor-ring {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(200,169,110,0.35);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none; z-index: 99998;
-      transform: translate(-50%, -50%);
-      transition: width .15s, height .15s, border-color .15s;
-    }
-    .aqr-cursor.hovered { width: 14px; height: 14px; box-shadow: 0 0 18px rgba(200,169,110,0.7); }
-    .aqr-cursor-ring.hovered { width: 48px; height: 48px; border-color: rgba(200,169,110,0.6); }
-
-    /* Scroll progress bar */
-    #aqr-scroll-bar {
-      position: fixed; top: 0; left: 0; height: 2px;
-      background: linear-gradient(90deg, #c8a96e, #e0c080);
-      z-index: 10001; width: 0%;
-      box-shadow: 0 0 8px rgba(200,169,110,0.5);
-      transition: width .1s linear;
-    }
-
-    /* Noise grain overlay */
-    .aqr-noise {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 9998; opacity: 0.022;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    /* Particles canvas */
-    #aqr-particles {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0; opacity: 0.35;
-    }
-
-    /* Scanlines */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background: repeating-linear-gradient(
-        0deg, transparent, transparent 2px,
-        rgba(200,169,110,0.008) 2px, rgba(200,169,110,0.008) 4px
-      );
-      pointer-events: none; z-index: 9997;
-    }
-
-    /* Scroll reveal */
-    .reveal-p {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity .75s cubic-bezier(.25,.46,.45,.94),
-                  transform .75s cubic-bezier(.25,.46,.45,.94);
-    }
-    .reveal-p.in { opacity: 1; transform: translateY(0); }
-    .reveal-p-left  { opacity:0; transform:translateX(-36px); transition: opacity .75s cubic-bezier(.25,.46,.45,.94), transform .75s cubic-bezier(.25,.46,.45,.94); }
-    .reveal-p-left.in  { opacity:1; transform:translateX(0); }
-    .reveal-p-right { opacity:0; transform:translateX(36px);  transition: opacity .75s cubic-bezier(.25,.46,.45,.94), transform .75s cubic-bezier(.25,.46,.45,.94); }
-    .reveal-p-right.in { opacity:1; transform:translateX(0); }
-
-    .reveal-p-d1 { transition-delay:.08s; }
-    .reveal-p-d2 { transition-delay:.16s; }
-    .reveal-p-d3 { transition-delay:.24s; }
-    .reveal-p-d4 { transition-delay:.32s; }
-    .reveal-p-d5 { transition-delay:.40s; }
-    .reveal-p-d6 { transition-delay:.48s; }
-
-    /* Counter */
-    .stat-num-anim { display:inline-block; }
-
-    /* Marquee strip */
-    .aqr-marquee-wrap {
-      overflow: hidden;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 18px 0;
-      margin: 0;
-    }
-    .aqr-marquee-track {
-      display: flex;
-      white-space: nowrap;
-      animation: aqrMarquee 28s linear infinite;
-    }
-    .aqr-marquee-track:hover { animation-play-state: paused; }
-    .aqr-marquee-item {
-      display: inline-flex; align-items: center; gap: 28px;
-      padding: 0 28px;
-      font-family: 'Space Mono', monospace;
-      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--text-muted); flex-shrink: 0;
-    }
-    .aqr-marquee-dot { width:3px; height:3px; background:#c8a96e; border-radius:50%; flex-shrink:0; }
-    @keyframes aqrMarquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-    /* Tier card hover lift */
-    .tier-card { transition: background .25s, transform .3s cubic-bezier(.25,.46,.45,.94), box-shadow .3s; }
-    .tier-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
-    .tier-card.highlighted:hover { box-shadow: 0 12px 40px rgba(200,169,110,0.15); }
-
-    /* Policy card hover */
-    .policy-card { transition: background .2s, transform .3s cubic-bezier(.25,.46,.45,.94); }
-    .policy-card:hover { transform: translateY(-3px); }
-
-    /* Funnel step entrance */
-    .funnel-step { transition: opacity .4s, transform .4s; }
-
-    /* Line draw animation */
-    .line-draw {
-      height: 1px; background: var(--accent);
-      transform: scaleX(0); transform-origin: left;
-      transition: transform 1s cubic-bezier(.25,.46,.45,.94);
-    }
-    .line-draw.in { transform: scaleX(1); }
-  </style>
-
-  <script>
-  (function() {
-    /* ── CURSOR ── */
-    const cur  = document.querySelector('.aqr-cursor');
-    const ring = document.querySelector('.aqr-cursor-ring');
-    let mx = 0, my = 0, rx = 0, ry = 0;
-
-    document.addEventListener('mousemove', e => {
-      mx = e.clientX; my = e.clientY;
-      cur.style.left  = mx + 'px';
-      cur.style.top   = my + 'px';
-    });
-
-    (function loop() {
-      rx += (mx - rx) * .11;
-      ry += (my - ry) * .11;
-      ring.style.left = rx + 'px';
-      ring.style.top  = ry + 'px';
-      requestAnimationFrame(loop);
-    })();
-
-    document.querySelectorAll('a,button,.tier-card,.policy-card,.funnel-cta-link,.pdf-option').forEach(el => {
-      el.addEventListener('mouseenter', () => { cur.classList.add('hovered'); ring.classList.add('hovered'); });
-      el.addEventListener('mouseleave', () => { cur.classList.remove('hovered'); ring.classList.remove('hovered'); });
-    });
-
-    /* ── SCROLL PROGRESS ── */
-    const bar = document.getElementById('aqr-scroll-bar');
-    window.addEventListener('scroll', () => {
-      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-      bar.style.width = pct + '%';
-    });
-
-    /* ── SCROLL REVEAL ── */
-    const revObs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.reveal-p, .reveal-p-left, .reveal-p-right, .line-draw').forEach(el => revObs.observe(el));
-
-    /* ── COUNTER ANIMATION ── */
-    const cntObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting || e.target.dataset.counted) return;
-        e.target.dataset.counted = '1';
-        const target = parseFloat(e.target.dataset.count);
-        const suffix = e.target.dataset.suffix || '';
-        const prefix = e.target.dataset.prefix || '';
-        const isFloat = String(target).includes('.');
-        const dur = 1800;
-        const start = performance.now();
-        (function tick(now) {
-          const p = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - p, 3);
-          const val = target * eased;
-          e.target.textContent = prefix + (isFloat ? val.toFixed(1) : Math.round(val)) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-        })(start);
-      });
-    }, { threshold: 0.6 });
-
-    document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
-
-    /* ── PARTICLES ── */
-    const canvas = document.getElementById('aqr-particles');
-    if (canvas) {
-      const ctx = canvas.getContext('2d');
-      let W = canvas.width  = window.innerWidth;
-      let H = canvas.height = window.innerHeight;
-
-      window.addEventListener('resize', () => {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-      });
-
-      const COUNT = Math.min(Math.floor(W * H / 18000), 50);
-      const pts = Array.from({ length: COUNT }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
-        r: Math.random() * 1.2 + .4,
-        a: Math.random() * .4 + .15
-      }));
-
-      (function frame() {
-        ctx.clearRect(0, 0, W, H);
-        pts.forEach(p => {
-          p.x += p.vx; p.y += p.vy;
-          if (p.x < 0 || p.x > W) p.vx *= -1;
-          if (p.y < 0 || p.y > H) p.vy *= -1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(200,169,110,${p.a})`;
-          ctx.fill();
-        });
-        for (let i = 0; i < pts.length; i++) {
-          for (let j = i + 1; j < pts.length; j++) {
-            const dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y;
-            const d = Math.sqrt(dx*dx + dy*dy);
-            if (d < 110) {
-              ctx.beginPath();
-              ctx.moveTo(pts[i].x, pts[i].y);
-              ctx.lineTo(pts[j].x, pts[j].y);
-              ctx.strokeStyle = `rgba(200,169,110,${(1 - d/110) * 0.06})`;
-              ctx.lineWidth = .5;
-              ctx.stroke();
-            }
-          }
-        }
-        requestAnimationFrame(frame);
-      })();
-    }
-
-    /* ── MARQUEE DUPLICATE ── */
-    document.querySelectorAll('.aqr-marquee-track').forEach(t => {
-      t.innerHTML += t.innerHTML;
-    });
-
-  })();
-  </script>
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+<div class="scroll-indicator"></div>
+<div class="noise"></div>
+<canvas id="particles-canvas"></canvas>
+
+
+<nav>
+
+<a href="index.html" class="nav-logo">AQR</a>
+
+<ul class="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="work.html">Work</a></li>
+<li><a href="pricing.html" class="active">Pricing</a></li>
+<li><a href="mission.html">Mission</a></li>
+<li><a href="edge.html">Our Edge</a></li>
+</ul>
+
+</nav>
+
+
+
+<section class="pricing-hero">
+
+<div class="reveal">
+
+<h1>Three Tiers.<br><em>One Standard.</em></h1>
+
+<p>
+Choose the engagement level that matches your business stage.
+All tiers deliver the same consulting-led thinking — the scope
+and depth scales with your needs.
+</p>
+
+<div class="hero-note">
+✦ Exact pricing shared on inquiry. Ranges shown here are starting points
+for self-qualification — final pricing is scoped after a free discovery conversation.
+</div>
+
+</div>
+
+
+<div class="hero-right reveal">
+
+<div class="hero-stat">
+<div class="hero-stat-num">3</div>
+<div class="hero-stat-label">Engagement Tiers</div>
+</div>
+
+<div class="hero-stat">
+<div class="hero-stat-num">2×</div>
+<div class="hero-stat-label">Currency Markets — INR & USD</div>
+</div>
+
+<div class="hero-stat">
+<div class="hero-stat-num">Free</div>
+<div class="hero-stat-label">Discovery Call — Always</div>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="container">
+
+<div class="toggle-wrap">
+
+<button class="toggle-btn active" onclick="setCurrency('inr')">₹ India (INR)</button>
+<button class="toggle-btn" onclick="setCurrency('usd')">$ International (USD)</button>
+
+</div>
+
+
+<div class="tiers-grid">
+
+<!-- STARTER -->
+
+<div class="tier-card reveal">
+
+<div class="tier-num">01 — STARTER</div>
+
+<div class="tier-name">Starter</div>
+
+<div class="tier-for">For solopreneurs & early-stage projects</div>
+
+<div class="price-val inr">₹799</div>
+<div class="price-val usd" style="display:none">$20</div>
+
+<div class="tier-divider"></div>
+
+<ul class="tier-features">
+
+<li><span>✓</span> Fixed-price deliverables</li>
+<li><span>✓</span> Direct execution by Arsalan</li>
+<li><span>✓</span> Ideal for single-service work</li>
+<li><span>✓</span> 1 revision round included</li>
+<li>— Strategy layer not included</li>
+
+</ul>
+
+<a href="#" class="tier-cta">Start with Starter →</a>
+
+</div>
+
+
+<!-- GROWTH -->
+
+<div class="tier-card highlighted reveal">
+
+<span class="popular-badge">Most Popular</span>
+
+<div class="tier-num">02 — GROWTH</div>
+
+<div class="tier-name">Growth</div>
+
+<div class="tier-for">For startups & businesses needing bundled solutions</div>
+
+<div class="price-val inr">₹4,999</div>
+<div class="price-val usd" style="display:none">$90</div>
+
+<div class="tier-divider"></div>
+
+<ul class="tier-features">
+
+<li><span>✓</span> Multi-service packages</li>
+<li><span>✓</span> Strategy-led execution</li>
+<li><span>✓</span> Clear deliverables</li>
+<li><span>✓</span> 2 revision rounds</li>
+<li><span>✓</span> Strategy layer included</li>
+
+</ul>
+
+<a href="#" class="tier-cta">Start with Growth →</a>
+
+</div>
+
+
+<!-- PARTNER -->
+
+<div class="tier-card reveal">
+
+<div class="tier-num">03 — PARTNER</div>
+
+<div class="tier-name">Partner</div>
+
+<div class="tier-for">For businesses wanting premium execution</div>
+
+<div class="price-val inr">₹9,999</div>
+<div class="price-val usd" style="display:none">$180</div>
+
+<div class="tier-divider"></div>
+
+<ul class="tier-features">
+
+<li><span>✓</span> Full strategic execution</li>
+<li><span>✓</span> Deep-dive consulting</li>
+<li><span>✓</span> Priority turnaround</li>
+<li><span>✓</span> Unlimited revisions</li>
+<li><span>✓</span> Retainer model</li>
+
+</ul>
+
+<a href="#" class="tier-cta">Start with Partner →</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="cta-banner">
+
+<div class="reveal">
+
+<h2>Tell me what you're trying<br><em>to achieve.</em></h2>
+
+<p>
+I'll personally review your needs and recommend the best solution —
+no templates, no auto-replies.
+</p>
+
+<p style="margin-top:10px;color:var(--dim)">
+— Arsalan, Founder, AQR Services
+</p>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+<div class="footer-inner">
+
+<div class="footer-brand">
+<a href="index.html">AQR Services</a>
+<p>Hybrid consulting–creative firm combining strategy, design and analytics.</p>
+</div>
+
+</div>
+
+</footer>
+
+
+
+<script src="script.js"></script>
+
+<script>
+
+function setCurrency(cur){
+
+document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'))
+
+event.target.classList.add('active')
+
+const inr = cur==="inr"
+
+document.querySelectorAll('.inr').forEach(el=>el.style.display=inr?"":"none")
+document.querySelectorAll('.usd').forEach(el=>el.style.display=inr?"none":"")
+
+}
+
+</script>
+
 
 </body>
 </html>
