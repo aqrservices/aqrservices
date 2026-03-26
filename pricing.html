@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pricing — AQR Services</title>
+
+<meta name="description"
+content="Transparent pricing tiers for AQR Services — Starter, Growth and Partner engagements.">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+
+/* ===============================
+PRICING HERO
+=============================== */
+
+.pricing-hero{
+padding:160px 48px 80px;
+max-width:1280px;
+margin:auto;
+}
+
+.pricing-hero-inner{
+max-width:720px;
+}
+
+.pricing-hero h1{
+font-family:var(--font-display);
+font-size:clamp(56px,8vw,120px);
+line-height:0.95;
+letter-spacing:-0.03em;
+margin-bottom:32px;
+}
+
+.pricing-hero p{
+font-size:15px;
+line-height:1.8;
+color:rgba(255,255,255,0.55);
+max-width:520px;
+}
+
+.pricing-note{
+margin-top:28px;
+padding:20px 22px;
+border:1px solid var(--border);
+background:rgba(255,255,255,0.02);
+font-size:13px;
+color:rgba(255,255,255,0.55);
+line-height:1.7;
+}
+
+
+/* ===============================
+PRICING GRID
+=============================== */
+
+.pricing-section{
+padding:120px 0;
+}
+
+.pricing-grid{
+max-width:1280px;
+margin:auto;
+padding:0 48px;
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:24px;
+}
+
+
+/* ===============================
+PRICING CARD
+=============================== */
+
+.price-card{
+
+background:rgba(255,255,255,0.02);
+
+border:1px solid var(--border);
+
+padding:48px 40px;
+
+display:flex;
+flex-direction:column;
+
+gap:22px;
+
+position:relative;
+
+transition:all .35s cubic-bezier(.25,.46,.45,.94);
+
+}
+
+.price-card:hover{
+
+transform:translateY(-8px);
+
+border-color:rgba(255,255,255,0.25);
+
+background:rgba(255,255,255,0.03);
+
+}
+
+
+/* highlight card */
+
+.price-card.highlight{
+
+border:1px solid rgba(255,255,255,0.35);
+
+background:rgba(255,255,255,0.04);
+
+}
+
+.price-card.highlight::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+height:2px;
+
+background:white;
+
+}
+
+
+/* ===============================
+TEXT
+=============================== */
+
+.price-tier{
+
+font-family:var(--font-mono);
+
+font-size:11px;
+
+letter-spacing:.15em;
+
+color:rgba(255,255,255,0.35);
+
+}
+
+.price-name{
+
+font-family:var(--font-display);
+
+font-size:30px;
+
+font-weight:700;
+
+}
+
+.price-for{
+
+font-size:13px;
+
+color:var(--dim);
+
+margin-bottom:10px;
+
+}
+
+.price-val{
+
+font-family:var(--font-display);
+
+font-size:52px;
+
+letter-spacing:-.02em;
+
+}
+
+.price-note{
+
+font-size:12px;
+
+color:rgba(255,255,255,0.35);
+
+}
+
+.price-divider{
+
+height:1px;
+
+background:var(--border);
+
+margin:8px 0 20px;
+
+}
+
+
+/* ===============================
+FEATURE LIST
+=============================== */
+
+.price-features{
+
+list-style:none;
+
+display:flex;
+
+flex-direction:column;
+
+gap:12px;
+
+flex:1;
+
+}
+
+.price-features li{
+
+font-size:13px;
+
+color:rgba(255,255,255,0.55);
+
+line-height:1.6;
+
+}
+
+.price-features span{
+
+color:white;
+
+margin-right:6px;
+
+}
+
+
+/* ===============================
+BEST FOR BOX
+=============================== */
+
+.price-best{
+
+padding:16px;
+
+border:1px solid var(--border);
+
+background:rgba(255,255,255,0.02);
+
+font-size:12px;
+
+line-height:1.6;
+
+color:rgba(255,255,255,0.5);
+
+}
+
+
+/* ===============================
+CTA
+=============================== */
+
+.price-cta{
+
+margin-top:10px;
+
+}
+
+
+/* ===============================
+BOTTOM CTA
+=============================== */
+
+.pricing-cta{
+
+padding:140px 48px;
+
+text-align:center;
+
+border-top:1px solid var(--border);
+
+}
+
+.pricing-cta h2{
+
+font-family:var(--font-display);
+
+font-size:clamp(40px,6vw,90px);
+
+line-height:1;
+
+margin-bottom:40px;
+
+}
+
+.pricing-cta em{
+
+font-style:normal;
+
+-webkit-text-stroke:1px white;
+
+color:transparent;
+
+}
+
+
+/* ===============================
+RESPONSIVE
+=============================== */
+
+@media(max-width:1024px){
+
+.pricing-grid{
+
+grid-template-columns:1fr;
+
+padding:0 24px;
+
+}
+
+.pricing-hero{
+
+padding:120px 24px 80px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="cursor"></div>
+<div class="cursor-follower"></div>
+
+<div class="scroll-indicator"></div>
+
+<div class="noise"></div>
+
+<canvas id="particles-canvas"></canvas>
+
+
+<nav>
+
+<a href="index.html" class="nav-logo"><span>AQR</span></a>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="about.html">About</a></li>
+
+<li><a href="services.html">Services</a></li>
+
+<li><a href="mission.html">Mission</a></li>
+
+<li><a href="edge.html">Our Edge</a></li>
+
+<li><a href="pricing.html" class="active">Pricing</a></li>
+
+</ul>
+
+<button class="hamburger">
+<span></span><span></span><span></span>
+</button>
+
+</nav>
+
+
+<div class="mobile-nav">
+
+<a href="index.html">Home</a>
+
+<a href="about.html">About</a>
+
+<a href="services.html">Services</a>
+
+<a href="mission.html">Mission</a>
+
+<a href="edge.html">Our Edge</a>
+
+<a href="pricing.html">Pricing</a>
+
+</div>
+
+
+<div class="page-wrap">
+
+
+<section class="pricing-hero">
+
+<div class="pricing-hero-inner reveal">
+
+<span class="label">Transparent Pricing</span>
+
+<h1>
+
+Three Tiers.<br>
+<em>One Standard.</em>
+
+</h1>
+
+<p>
+
+Choose the engagement level that matches your stage.  
+Every tier delivers the same consulting-first thinking — the difference is depth and scope.
+
+</p>
+
+<div class="pricing-note">
+
+Exact pricing is finalized after a discovery conversation.  
+Ranges here exist purely for transparency and self-qualification.
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section class="pricing-section">
+
+<div class="pricing-grid">
+
+
+<!-- STARTER -->
+
+<div class="price-card reveal">
+
+<div class="price-tier">01 — STARTER</div>
+
+<div class="price-name">Starter</div>
+
+<div class="price-for">Solopreneurs & small projects</div>
+
+<div class="price-val">₹799+</div>
+
+<div class="price-note">Full payment upfront</div>
+
+<div class="price-divider"></div>
+
+<ul class="price-features">
+
+<li><span>✓</span>Single deliverable project</li>
+
+<li><span>✓</span>Fast turnaround execution</li>
+
+<li><span>✓</span>Direct execution by Arsalan</li>
+
+<li><span>✓</span>1 revision included</li>
+
+<li>Strategy layer not included</li>
+
+</ul>
+
+<div class="price-best">
+
+Best for freelancers, individuals, and early founders.
+
+</div>
+
+<div class="price-cta">
+
+<a href="https://wa.me/916006464058" class="btn btn-ghost btn-magnetic">
+
+<span>Start with Starter</span>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- GROWTH -->
+
+<div class="price-card highlight reveal">
+
+<div class="price-tier">02 — GROWTH</div>
+
+<div class="price-name">Growth</div>
+
+<div class="price-for">Startups & growing businesses</div>
+
+<div class="price-val">₹4,999+</div>
+
+<div class="price-note">50% advance · 50% delivery</div>
+
+<div class="price-divider"></div>
+
+<ul class="price-features">
+
+<li><span>✓</span>Multi-service bundled projects</li>
+
+<li><span>✓</span>Strategy-led execution</li>
+
+<li><span>✓</span>AQR hybrid delivery model</li>
+
+<li><span>✓</span>Quality review before delivery</li>
+
+<li><span>✓</span>2 revision rounds</li>
+
+</ul>
+
+<div class="price-best">
+
+Best for startups, SMEs, brand launches.
+
+</div>
+
+<div class="price-cta">
+
+<a href="https://wa.me/916006464058" class="btn btn-magnetic">
+
+<span>Start with Growth</span>
+
+<span class="btn-arrow">→</span>
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- PARTNER -->
+
+<div class="price-card reveal">
+
+<div class="price-tier">03 — PARTNER</div>
+
+<div class="price-name">Partner</div>
+
+<div class="price-for">Scaling businesses</div>
+
+<div class="price-val">₹9,999+</div>
+
+<div class="price-note">50% advance · 50% delivery</div>
+
+<div class="price-divider"></div>
+
+<ul class="price-features">
+
+<li><span>✓</span>Full strategic execution</li>
+
+<li><span>✓</span>Priority turnaround</li>
+
+<li><span>✓</span>Unlimited revisions in scope</li>
+
+<li><span>✓</span>Dedicated consulting layer</li>
+
+<li><span>✓</span>Retainer model available</li>
+
+</ul>
+
+<div class="price-best">
+
+Best for scaling startups and long-term partnerships.
+
+</div>
+
+<div class="price-cta">
+
+<a href="https://wa.me/916006464058" class="btn btn-ghost btn-magnetic">
+
+<span>Start with Partner</span>
+
+</a>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="pricing-cta">
+
+<div class="reveal">
+
+<span class="label">Next Step</span>
+
+<h2>
+
+Let's Build<br>
+<em>Something Real.</em>
+
+</h2>
+
+<div class="hero-actions" style="justify-content:center;margin-top:30px">
+
+<a href="https://wa.me/916006464058" class="btn btn-magnetic">
+
+<span>Discuss Your Project</span>
+
+<span class="btn-arrow">→</span>
+
+</a>
+
+<a href="services.html" class="btn btn-ghost btn-magnetic">
+
+<span>Explore Services</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<footer>
+
+<div class="footer-inner">
+
+<div class="footer-brand">
+
+<a href="index.html" class="nav-logo"><span>AQR Services</span></a>
+
+<p>
+
+Hybrid consulting–creative firm combining strategy, design and analytics.
+
+</p>
+
+</div>
+
+<div class="footer-col">
+
+<h4>Navigation</h4>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="about.html">About</a></li>
+
+<li><a href="services.html">Services</a></li>
+
+<li><a href="pricing.html">Pricing</a></li>
+
+<li><a href="edge.html">Our Edge</a></li>
+
+</ul>
+
+</div>
+
+<div class="footer-col">
+
+<h4>Connect</h4>
+
+<ul>
+
+<li><a href="#">LinkedIn</a></li>
+
+<li><a href="#">Instagram</a></li>
+
+<li><a href="mailto:aqrservices.in@gmail.com">Email</a></li>
+
+<li><a href="https://wa.me/916006464058">WhatsApp</a></li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>© 2025 AQR Services. All rights reserved.</p>
+
+<p>Srinagar, Jammu & Kashmir, India</p>
+
+<p>Design & Development — Tron Develops</p>
+
+</div>
+
+</footer>
+
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
