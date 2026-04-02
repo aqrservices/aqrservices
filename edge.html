@@ -6,7 +6,7 @@
   <title>Our Edge — AQR Services</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    .page-hero { padding: 160px 48px 100px; max-width: 1280px; margin: 0 auto; position: relative; }
+    .page-hero { padding: 160px var(--px) 100px; max-width: 1280px; margin: 0 auto; position: relative; }
     .page-hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; opacity: 0; animation: fadeUp 0.7s ease 0.3s forwards; }
     .page-hero-eyebrow-line { width: 40px; height: 1px; background: var(--white); }
     .page-hero h1 { font-size: clamp(60px, 9vw, 120px); line-height: 0.95; letter-spacing: -0.03em; opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.25,0.46,0.45,0.94) 0.4s forwards; }
@@ -23,7 +23,7 @@
     .diff-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 var(--px);
     }
 
     .diff-grid {
@@ -91,7 +91,7 @@
     .compare-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 var(--px);
     }
 
     .compare-table {
@@ -152,7 +152,7 @@
     .proof-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 var(--px);
     }
 
     .proof-grid {
@@ -165,7 +165,7 @@
 
     .proof-card {
       background: var(--black);
-      padding: 56px 48px;
+      padding: 56px var(--px);
       position: relative;
       overflow: hidden;
     }
@@ -206,7 +206,7 @@
     /* MANIFESTO */
     .manifesto-section {
       border-top: 1px solid var(--border);
-      padding: 120px 48px;
+      padding: 120px var(--px);
       max-width: 1280px;
       margin: 0 auto;
       text-align: center;
@@ -235,8 +235,8 @@
     }
 
     @media (max-width: 768px) {
-      .page-hero { padding: 120px 24px 60px; }
-      .diff-inner, .compare-inner, .proof-inner { padding: 0 24px; }
+      .page-hero { padding: 120px var(--px) 60px; }
+      .diff-inner, .compare-inner, .proof-inner { padding: 0 var(--px); }
       .diff-row { grid-template-columns: 1fr; gap: 16px; }
       .compare-table { display: none; }
       .proof-grid { grid-template-columns: 1fr; }
@@ -253,12 +253,13 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>AQR</span></a>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="index.html" data-index="01">Home</a></li>
     <li><a href="about.html" data-index="02">About</a></li>
     <li><a href="services.html" data-index="03">Services</a></li>
     <li><a href="mission.html" data-index="04">Mission</a></li>
     <li><a href="edge.html" data-index="05">Our Edge</a></li>
+    <li><a href="pricing.html" data-index="06">Pricing</a></li>
   </ul>
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
@@ -269,6 +270,7 @@
   <a href="services.html">Services</a>
   <a href="mission.html">Mission</a>
   <a href="edge.html">Our Edge</a>
+  <a href="pricing.html">Pricing</a>
 </div>
 
 <div class="page-wrap">
@@ -481,7 +483,7 @@
 
   <!-- CTA -->
   <section style="border-top: 1px solid var(--border); padding: 100px 0; text-align: center;">
-    <div style="max-width: 700px; margin: 0 auto; padding: 0 48px;">
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 var(--px);">
       <div class="label reveal">Ready to Experience the Edge?</div>
       <h2 class="reveal reveal-delay-1" style="margin: 20px 0 40px; font-size: clamp(36px, 5vw, 70px); line-height: 1;">
         Let's Build<br><em style="font-style:normal; -webkit-text-stroke: 1px white; color: transparent;">Together.</em>
@@ -499,7 +501,7 @@
         <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
         <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
       </div>
-      <div class="footer-col">
+            <div class="footer-col">
         <h4>Navigation</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -507,6 +509,7 @@
           <li><a href="services.html">Services</a></li>
           <li><a href="mission.html">Mission</a></li>
           <li><a href="edge.html">Our Edge</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -514,18 +517,21 @@
         <ul>
           <li><a href="services.html">Presentations</a></li>
           <li><a href="services.html">Dashboards</a></li>
-          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Social Media</a></li>
           <li><a href="services.html">Consulting</a></li>
+          <li><a href="services.html">Research</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
         <ul>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Email Us</a></li>
+          <li><a href="https://www.linkedin.com/company/aqr-services/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/aqr.services?igsh=NnB6ODBrZDR2NXl2" target="_blank">Instagram</a></li>
+          <li><a href="mailto:contact.aqrservices@gmail.com">Email Us</a></li>
+          <li><a href="https://wa.me/916006464058" target="_blank">WhatsApp</a></li>
         </ul>
       </div>
-    </div>
+</div>
     <div class="footer-bottom">
       <p>© 2025 AQR Services. All rights reserved.</p>
       <p>Srinagar, Jammu & Kashmir, India</p>
