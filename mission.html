@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
   <style>
     .page-hero {
-      padding: 160px 48px 100px;
+      padding: 160px var(--px) 100px;
       max-width: 1280px;
       margin: 0 auto;
       position: relative;
@@ -22,7 +22,7 @@
     /* BIG STATEMENT */
     .statement-section {
       border-top: 1px solid var(--border);
-      padding: 120px 48px;
+      padding: 120px var(--px);
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -52,7 +52,7 @@
     .mv-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 var(--px);
     }
 
     .mv-full-grid {
@@ -108,7 +108,7 @@
     .commitment-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 var(--px);
     }
 
     .commitment-text {
@@ -144,7 +144,7 @@
     .timeline-inner {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 0 48px;
+      padding: 0 var(--px);
     }
 
     .timeline {
@@ -201,15 +201,15 @@
     }
 
     @media (max-width: 768px) {
-      .page-hero { padding: 120px 24px 60px; }
+      .page-hero { padding: 120px var(--px) 60px; }
       .statement-section { padding: 80px 24px; }
       .big-statement { padding-left: 24px; }
-      .mv-inner { padding: 0 24px; }
+      .mv-inner { padding: 0 var(--px); }
       .mv-full-grid { grid-template-columns: 1fr; gap: 24px; }
       .mv-card { padding: 40px 28px; }
-      .commitment-inner { padding: 0 24px; }
+      .commitment-inner { padding: 0 var(--px); }
       .commitment-pillars { grid-template-columns: 1fr; }
-      .timeline-inner { padding: 0 24px; }
+      .timeline-inner { padding: 0 var(--px); }
     }
   </style>
 </head>
@@ -222,12 +222,13 @@
 
 <nav>
   <a href="index.html" class="nav-logo"><span>AQR</span></a>
-  <ul class="nav-links">
+    <ul class="nav-links">
     <li><a href="index.html" data-index="01">Home</a></li>
     <li><a href="about.html" data-index="02">About</a></li>
     <li><a href="services.html" data-index="03">Services</a></li>
     <li><a href="mission.html" data-index="04">Mission</a></li>
     <li><a href="edge.html" data-index="05">Our Edge</a></li>
+    <li><a href="pricing.html" data-index="06">Pricing</a></li>
   </ul>
   <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
@@ -238,6 +239,7 @@
   <a href="services.html">Services</a>
   <a href="mission.html">Mission</a>
   <a href="edge.html">Our Edge</a>
+  <a href="pricing.html">Pricing</a>
 </div>
 
 <div class="page-wrap">
@@ -380,7 +382,7 @@
 
   <!-- CTA -->
   <section style="border-top: 1px solid var(--border); padding: 100px 0; text-align: center;">
-    <div style="max-width: 700px; margin: 0 auto; padding: 0 48px;">
+    <div style="max-width: 700px; margin: 0 auto; padding: 0 var(--px);">
       <div class="label reveal">Join the Journey</div>
       <h2 class="reveal reveal-delay-1" style="margin: 20px 0 40px; font-size: clamp(36px, 5vw, 70px); line-height: 1;">
         Something Greater<br>Is <em style="font-style:normal; -webkit-text-stroke: 1px white; color: transparent;">Taking Shape.</em>
@@ -398,7 +400,7 @@
         <a href="index.html" class="nav-logo"><span>AQR Services</span></a>
         <p>Hybrid consulting–creative firm combining strategy, design, and analytics for modern businesses.</p>
       </div>
-      <div class="footer-col">
+            <div class="footer-col">
         <h4>Navigation</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
@@ -406,6 +408,7 @@
           <li><a href="services.html">Services</a></li>
           <li><a href="mission.html">Mission</a></li>
           <li><a href="edge.html">Our Edge</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -413,18 +416,21 @@
         <ul>
           <li><a href="services.html">Presentations</a></li>
           <li><a href="services.html">Dashboards</a></li>
-          <li><a href="services.html">Brand Design</a></li>
+          <li><a href="services.html">Social Media</a></li>
           <li><a href="services.html">Consulting</a></li>
+          <li><a href="services.html">Research</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Connect</h4>
         <ul>
-          <li><a href="#">LinkedIn</a></li>
-          <li><a href="#">Email Us</a></li>
+          <li><a href="https://www.linkedin.com/company/aqr-services/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/aqr.services?igsh=NnB6ODBrZDR2NXl2" target="_blank">Instagram</a></li>
+          <li><a href="mailto:contact.aqrservices@gmail.com">Email Us</a></li>
+          <li><a href="https://wa.me/916006464058" target="_blank">WhatsApp</a></li>
         </ul>
       </div>
-    </div>
+</div>
     <div class="footer-bottom">
       <p>© 2025 AQR Services. All rights reserved.</p>
       <p>Srinagar, Jammu & Kashmir, India</p>
